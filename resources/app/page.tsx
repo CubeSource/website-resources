@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import StarryBackground from "../components/StarryBackground";
 import { categories } from "../data/categories";
-import { vt323 } from "../lib/fonts";
+import { outfit, vt323 } from "../lib/fonts";
 
 export default function Home() {
   const router = useRouter();
@@ -29,6 +29,11 @@ export default function Home() {
             className="mb-5 m-[5px] h-auto w-10 md:w-14"
             priority
           />
+          {/*<p
+            className={`${outfit.className} mb-7 text-md text-white md:text-base`}
+          >
+            A free resource offered by CubeSource, complete with visuals, diagrams and tutorials.
+          </p>*/}
           <nav className="space-y-3 md:space-y-6">
             {categories.map((category) => (
               <div

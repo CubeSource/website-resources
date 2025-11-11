@@ -8,7 +8,7 @@ export const categories: Category[] = [
   {
     title: "What's a CubeSat?",
     description:
-      "Understand CubeSat anatomy, mission profiles, and why nanosats changed classroom space programs.",
+      "Break down CubeSat bus architecture, standard form factors, and how power, thermal, and communications budgets map to missions.",
     route: "/docs/foundations",
   },
   {

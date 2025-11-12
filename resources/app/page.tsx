@@ -36,9 +36,12 @@ export default function Home() {
           </p>*/}
           <nav className="space-y-8 md:space-y-10">
             {categories.map((category) => (
-              <section key={category.name} className="space-y-3 md:space-y-4">
+              <section
+                key={category.name}
+                className="space-y-3 md:space-y-4 first:mt-0 mt-10"
+              >
                 <h2
-                  className={`${outfit.className} text-sm uppercase tracking-wide text-zinc-400`}
+                  className={`${vt323.className} text-3xl text-zinc-400 mt-4 mb-2`}
                 >
                   {category.name}
                 </h2>

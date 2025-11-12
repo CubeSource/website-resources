@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <StarryBackground />
-      <div className="relative z-10 flex min-h-dvh items-start justify-center pt-8 px-6 sm:pt-16 md:px-10 md:py-40">
+      <div className="relative z-10 flex min-h-dvh items-start justify-center py-20 px-6 sm:py-24 md:px-10 md:py-40">
         <div className="w-full max-w-3xl">
           <Image
             src="/Logo.png"
@@ -61,13 +61,35 @@ export default function Home() {
                         }
                       }}
                     >
-                      <span
-                        className={`${vt323.className} inline-block text-4xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
-                          openRoute === item.route ? " text-zinc-200" : ""
-                        }`}
-                      >
-                        {item.title}
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`${vt323.className} inline-block text-3xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
+                            openRoute === item.route ? " text-zinc-200" : ""
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                        <span
+                          className={`pointer-events-none inline-flex h-6 w-4 items-center justify-center text-zinc-300 transition-opacity duration-300 ease-out${
+                            openRoute === item.route ? " opacity-100" : " opacity-0"
+                          }`}
+                          aria-hidden="true"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <path d="M18 6L6 18" />
+                            <path d="M6 6l12 12" />
+                          </svg>
+                        </span>
+                      </div>
                       <span
                         className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
                           openRoute === item.route

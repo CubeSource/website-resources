@@ -11,7 +11,7 @@ export type Category = {
 
 export const categories: Category[] = [
   {
-    name: "Core Topics",
+    name: "Getting Started",
     items: [
       {
         title: "What's a CubeSat?",
@@ -37,7 +37,7 @@ export const categories: Category[] = [
         route: "/docs/structure/fasteners",
       },
       {
-        title: "Manufacturing/Coatings",
+        title: "Manufacturing & Coatings",
         description:
           "Review fabrication considerations, tolerances, and surface treatments for aerospace structures.",
         route: "/docs/structure/manufacturing-coatings",
@@ -45,10 +45,10 @@ export const categories: Category[] = [
     ],
   },
   {
-    name: "Hold Down Release Mechanisms",
+    name: "Hold-Down Release Mechanisms",
     items: [
       {
-        title: "Thermal Knives (aka Burnwires)",
+        title: "Thermal Knives / Burnwires",
         description:
           "Design and qualify nichrome burnwire systems, from power sizing to redundancy planning.",
         route: "/docs/hdrm/thermal-knives",
@@ -94,19 +94,19 @@ export const categories: Category[] = [
         route: "/docs/assembly/fastener-torque-calculations",
       },
       {
-        title: "Epoxies/Adhesives",
+        title: "Epoxies / Adhesives",
         description:
           "Select and apply aerospace adhesives with appropriate surface prep and cure cycles.",
         route: "/docs/assembly/epoxies-adhesives",
       },
       {
-        title: "Tools/Organization",
+        title: "Tools & Organization",
         description:
           "Set up cleanroom-friendly tools, kitting, and ESD-safe workflows for integration.",
         route: "/docs/assembly/tools-organization",
       },
       {
-        title: "Jigs/Fixtures",
+        title: "Jigs & Fixtures",
         description:
           "Design and validate jigs and fixtures that support repeatable, precise assembly work.",
         route: "/docs/assembly/jigs-fixtures",

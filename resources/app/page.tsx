@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <StarryBackground />
-      <div className="relative z-10 flex min-h-dvh items-start justify-center pt-8 px-6 sm:pt-16 md:px-10 md:pt-40">
+      <div className="relative z-10 flex min-h-dvh items-start justify-center pt-8 px-6 sm:pt-16 md:px-10 md:py-40">
         <div className="w-full max-w-3xl">
           <Image
             src="/Logo.png"
@@ -41,7 +41,7 @@ export default function Home() {
                 className="space-y-3 md:space-y-4 first:mt-0 mt-10"
               >
                 <h2
-                  className={`${vt323.className} text-3xl text-zinc-400 mt-4 mb-2`}
+                  className={`${vt323.className} text-xl text-zinc-400 mt-4 mb-1`}
                 >
                   {category.name}
                 </h2>

@@ -34,64 +34,76 @@ export default function Home() {
           >
             A free resource offered by CubeSource, complete with visuals, diagrams and tutorials.
           </p>*/}
-          <nav className="space-y-3 md:space-y-6">
+          <nav className="space-y-8 md:space-y-10">
             {categories.map((category) => (
-              <div
-                key={category.route}
-                className="group block cursor-pointer "
-                role="button"
-                tabIndex={0}
-                aria-expanded={openRoute === category.route}
-                onClick={() => toggleRoute(category.route)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    toggleRoute(category.route);
-                  }
-                }}
-              >
-                <span
-                  className={`${vt323.className} inline-block text-4xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
-                    openRoute === category.route ? " text-zinc-200" : ""
-                  }`}
+              <section key={category.name} className="space-y-3 md:space-y-4">
+                <h2
+                  className={`${outfit.className} text-sm uppercase tracking-wide text-zinc-400`}
                 >
-                  {category.title}
-                </span>
-                <span
-                  className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
-                    openRoute === category.route ? " mt-2 max-h-40 opacity-100" : ""
-                  }`}
-                >
-                  {category.description}
-                  <br />
-                  <button
-                    type="button"
-                    className={`${vt323.className} cursor-pointer group/button mt-3 inline-flex items-center gap-3 rounded-md bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md`}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      router.push(category.route);
-                    }}
-                  >
-                    <span className="relative z-10">Start learning</span>
-                    <span className="flex h-7 items-center justify-center transition-colors duration-300 ease-out group-hover/button:text-zinc-700">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="h-5 w-5 text-black"
-                        aria-hidden="true"
+                  {category.name}
+                </h2>
+                <div className="space-y-3 md:space-y-6">
+                  {category.items.map((item) => (
+                    <div
+                      key={item.route}
+                      className="group block cursor-pointer "
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={openRoute === item.route}
+                      onClick={() => toggleRoute(item.route)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          toggleRoute(item.route);
+                        }
+                      }}
+                    >
+                      <span
+                        className={`${vt323.className} inline-block text-4xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
+                          openRoute === item.route ? " text-zinc-200" : ""
+                        }`}
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M4.75 10a.75.75 0 01.75-.75h6.19l-2.22-2.22a.75.75 0 111.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H5.5A.75.75 0 014.75 10z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </span>
-                
-              </div>
+                        {item.title}
+                      </span>
+                      <span
+                        className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
+                          openRoute === item.route
+                            ? " mt-2 max-h-40 opacity-100"
+                            : ""
+                        }`}
+                      >
+                        {item.description}
+                        <br />
+                        <button
+                          type="button"
+                          className={`${vt323.className} cursor-pointer group/button mt-3 inline-flex items-center gap-3 rounded-md bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            router.push(item.route);
+                          }}
+                        >
+                          <span className="relative z-10">Start learning</span>
+                          <span className="flex h-7 items-center justify-center transition-colors duration-300 ease-out group-hover/button:text-zinc-700">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="h-5 w-5 text-black"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.75 10a.75.75 0 01.75-.75h6.19l-2.22-2.22a.75.75 0 111.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H5.5A.75.75 0 014.75 10z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </span>
+                        </button>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </section>
             ))}
           </nav>
         </div>

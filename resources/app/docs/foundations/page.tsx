@@ -11,10 +11,10 @@ export default function FoundationsPage() {
       <main className="relative z-10 flex min-h-dvh items-start justify-center py-20 px-6 sm:py-24 md:px-10 md:py-40">
         <div className="w-full max-w-3xl space-y-8">
           <div className="space-y-3">
-            <p className={`${vt323.className} text-xl text-zinc-400 sm:text-2xl`}>
-              Getting Started <span className="text-zinc-500">\\</span> What&apos;s a CubeSat?
+            <p className={`${vt323.className} text-lg text-zinc-400 sm:text-2xl`}>
+              01 <span className="text-zinc-500">\\</span> Getting Started <span className="text-zinc-500">\\</span> What&apos;s a CubeSat?
             </p>
-            <h1 className={`${vt323.className} text-xl text-white sm:text-5xl`}>
+            <h1 className={`${vt323.className} text-4xl text-white sm:text-5xl`}>
               A CubeSat is a type of miniaturized satellite consisting of multiples of 10×10×10 cm cubic units.
             </h1>
           </div>

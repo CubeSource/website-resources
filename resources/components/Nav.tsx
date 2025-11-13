@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState, useEffect, ReactNode } from "react";
 import { vt323 } from "../lib/fonts";
+import { categories } from "../data/categories";
 
 interface NavLink {
   href: string;
@@ -19,13 +21,27 @@ interface NavLinkProps {
 }
 
 export default function NavBar() {
-  // Navigation links data
-  const navLinks: NavLink[] = [
-    { href: "#projects", label: "Projects", about: "View our portfolio of the projects we've done for nonprofits and other clubs." },
-    { href: "#learn", label: "Learn", about: "Check out our educational resources and guides for web development and design." },
-    { href: "#origins", label: "Origins", about: "Read about our history, executive team, and founding philosophy." },
-    { href: "#partners", label: "Partners", about: "Meet the collaborators, sponsors, and nonprofit partners we work with." }
-  ];
+  // Navigation links data - derived from categories
+  const navLinks: NavLink[] = categories.map((category) => {
+    // Shorten category names for nav
+    const shortNames: Record<string, string> = {
+      "Getting Started": "Getting Started",
+      "Structure": "Structure",
+      "Hold-Down Release Mechanisms": "Mechanisms",
+      "Electrical Power Systems (EPS)": "Electrical",
+      "Assembly": "Assembly",
+      "Environmental Testing": "Testing"
+    };
+    
+    // Get the first item's route as the href, or use a hash-based anchor
+    const href = category.items.length > 0 ? category.items[0].route : `#${category.name.toLowerCase().replace(/\s+/g, '-')}`;
+    
+    return {
+      href,
+      label: shortNames[category.name] || category.name,
+      about: category.items.length > 0 ? category.items[0].description : undefined
+    };
+  });
 
   // Social media links
   const socialLinks: SocialLink[] = [
@@ -58,7 +74,7 @@ export default function NavBar() {
   // Custom NavLink component with a white animated underline effect
   const NavLink = ({ href, children }: NavLinkProps) => {
     return (
-      <a 
+      <Link 
         href={href} 
         className={`${vt323.className} text-white px-4 relative group inline-block`}
       >
@@ -68,7 +84,7 @@ export default function NavBar() {
             className="absolute left-0 bottom-[1px] w-full h-0.5 transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 bg-white"
           />
         </span>
-      </a>
+      </Link>
     );
   };
 
@@ -146,13 +162,12 @@ export default function NavBar() {
                     transitionDelay: menuOpen ? `${(index * 75) + 100}ms` : '0ms'
                   }}
                 >
-                  <a 
+                  <Link 
                     href={link.href} 
                     className={`${vt323.className} block py-3 px-2 text-2xl text-white hover:bg-white/10 transition-colors`}
-                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                      // Prevent default to avoid navigation
-                      e.preventDefault();
-                      // Add logic to handle the navigation if needed
+                    onClick={() => {
+                      // Close menu on navigation
+                      setMenuOpen(false);
                     }}
                   >
                     {link.label}
@@ -161,13 +176,13 @@ export default function NavBar() {
                         {link.about}
                       </span>
                     )}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
             
             {/* Social media links row */}
-            <div className={`flex px-2 space-x-8 mt-4 transition-all duration-300 ease-in-out ${
+            {/* <div className={`flex px-2 space-x-8 mt-4 transition-all duration-300 ease-in-out ${
               menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`} style={{ transitionDelay: menuOpen ? '500ms' : '0ms' }}>
               {socialLinks.map((link, index) => (
@@ -185,7 +200,7 @@ export default function NavBar() {
                   {link.label}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

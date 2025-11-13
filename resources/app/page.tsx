@@ -21,7 +21,7 @@ export default function Home() {
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <NavBar />
       <StarryBackground />
-      <div className="relative z-10 flex min-h-dvh items-start justify-center py-20 px-6 sm:py-24 md:px-10 md:py-40">
+      <div className="relative z-10 flex min-h-dvh items-start justify-center py-24 px-6 sm:py-24 md:px-10 md:py-40">
         <div className="w-full max-w-3xl">
           <Image
             src="/Logo.png"

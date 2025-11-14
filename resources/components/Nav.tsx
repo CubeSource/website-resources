@@ -53,6 +53,46 @@ export default function NavBar() {
   // State to track if mobile menu is open
   const [menuOpen, setMenuOpen] = useState(false);
   
+  // State to track scroll direction and nav visibility
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  // Handle scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show nav when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        // Scrolling up or near top
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        // Scrolling down
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+    };
+  }, [lastScrollY]);
+  
   // Prevent scrolling when menu is open
   useEffect(() => {
     if (menuOpen) {
@@ -107,7 +147,13 @@ export default function NavBar() {
       : 'max-h-0 opacity-0 mt-0';
 
   return (
-    <div className={`fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out z-50 ${containerClasses}`}>
+    <div 
+      className={`fixed top-0 left-0 right-0 z-50 ${containerClasses}`}
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'transform 0.6s cubic-bezier(0.34, 1.1, 0.64, 1)',
+      }}
+    >
       {/* Mobile and desktop navbar */}
       <div className={`w-full h-full flex ${menuOpen ? 'items-start' : 'justify-center items-center'}`}>
         <div 

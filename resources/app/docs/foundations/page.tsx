@@ -7,6 +7,7 @@ import { vt323 } from "../../../lib/fonts";
 import Title from "../../../components/content/Title";
 import Header from "../../../components/content/Header";
 import Text from "../../../components/content/Text";
+import Section from "../../../components/content/Section";
 
 export default function FoundationsPage() {
   return (
@@ -25,9 +26,7 @@ export default function FoundationsPage() {
           </div>
           
           <section className="space-y-4">
-            <h2 className={`${vt323.className} text-xl text-zinc-400 sm:text-2xl`}>
-              Standard Form Factors
-            </h2>
+            <Section>Standard Form Factors</Section>
             <Text>
               CubeSats are defined in units (U). The most common sizes are 1U, 2U, 3U, and 6U. Each unit is a 10×10×11.35 cm cube. 
               This standardization allows for easier deployment mechanisms and flexible launch opportunities.
@@ -35,9 +34,7 @@ export default function FoundationsPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className={`${vt323.className} text-xl text-zinc-400 sm:text-2xl`}>
-              Key Subsystems
-            </h2>
+            <Section>Key Subsystems</Section>
             <Text>
               Every CubeSat requires several critical subsystems: power management, communications, attitude determination and control, 
               thermal management, and command and data handling. Understanding how these systems interact and their design constraints 

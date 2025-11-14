@@ -15,7 +15,7 @@ export default function FoundationsPage() {
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <NavBar />
       <StarryBackground />
-      <main className="relative z-10 flex min-h-dvh items-start justify-center py-20 px-6 sm:py-24 md:px-10 md:py-40">
+      <main className="relative z-10 flex min-h-dvh items-start justify-center py-24 px-6 sm:py-24 md:px-10 md:py-40">
         <div className="w-full max-w-3xl space-y-8">
           <div className="space-y-3">
             <Title number="01" category="Getting Started">

@@ -25,7 +25,7 @@ export default function NavBar() {
   const navLinks: NavLink[] = categories.map((category) => {
     // Shorten category names for nav
     const shortNames: Record<string, string> = {
-      "Getting Started": "Getting Started",
+      "Getting Started": "Introduction",
       "Structure": "Structure",
       "Hold-Down Release Mechanisms": "Mechanisms",
       "Electrical Power Systems (EPS)": "Electrical",

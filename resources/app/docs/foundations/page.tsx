@@ -8,6 +8,7 @@ import Title from "../../../components/content/Title";
 import Header from "../../../components/content/Header";
 import Text from "../../../components/content/Text";
 import Section from "../../../components/content/Section";
+import Model from "../../../components/content/Model";
 
 export default function FoundationsPage() {
   return (
@@ -23,6 +24,7 @@ export default function FoundationsPage() {
             <Header>
               A CubeSat is a type of miniaturized satellite consisting of multiples of 10×10×10 cm cubic units.
             </Header>
+            <Model />
           </div>
           
           <section className="space-y-4">

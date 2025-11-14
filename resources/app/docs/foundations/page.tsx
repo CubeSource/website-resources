@@ -25,7 +25,7 @@ export default function FoundationsPage() {
               A CubeSat is a type of miniaturized satellite consisting of multiples of 10×10×10 cm cubic units.
             </Header>
             <Image src="CubeSat.jpg" alt="CubeSat diagram">
-              A CubeSat being handled by a NASA technician.
+              A 1U CubeSat being handled by a NASA technician.
             </Image>
           </div>
           

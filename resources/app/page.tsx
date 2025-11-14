@@ -103,27 +103,36 @@ export default function Home() {
                         <br />
                         <button
                           type="button"
-                          className={`${vt323.className} cursor-pointer group/button mt-3 inline-flex items-center gap-3 rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md`}
+                          className={`${vt323.className} cursor-pointer group/button mt-3 relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden`}
                           onClick={(event) => {
                             event.stopPropagation();
                             router.push(item.route);
                           }}
                         >
-                          <span className="relative z-10">Start Learning</span>
-                          <span className="flex h-7 items-center justify-center transition-colors duration-300 ease-out group-hover/button:text-zinc-700">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="h-5 w-5 text-black"
-                              aria-hidden="true"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M4.75 10a.75.75 0 01.75-.75h6.19l-2.22-2.22a.75.75 0 111.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H5.5A.75.75 0 014.75 10z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                          <span 
+                            data-overlay
+                            className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
+                          />
+                          <span 
+                            className="relative z-10 inline-block"
+                            onMouseEnter={(e) => {
+                              const button = e.currentTarget.closest('button');
+                              const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                              if (overlay) {
+                                overlay.classList.remove('scale-x-0');
+                                overlay.classList.add('scale-x-100');
+                              }
+                            }}
+                            onMouseLeave={(e) => {
+                              const button = e.currentTarget.closest('button');
+                              const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                              if (overlay) {
+                                overlay.classList.remove('scale-x-100');
+                                overlay.classList.add('scale-x-0');
+                              }
+                            }}
+                          >
+                            Start Learning
                           </span>
                         </button>
                       </span>

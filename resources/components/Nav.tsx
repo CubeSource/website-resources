@@ -159,7 +159,7 @@ export default function NavBar() {
               <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer">
                 <Image src="/Logo.png" alt="UCDevs logo" width={15} height={22} className="!w-[15px] !h-[22px]" style={{ width: '15px', height: '22px' }} />
               </a>
-              <Link 
+              {/* <Link 
                 href="/" 
                 className="text-white hover:text-zinc-300 transition-colors duration-300 flex items-center justify-center ml-2"
                 aria-label="Home"
@@ -177,7 +177,7 @@ export default function NavBar() {
                   <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                   <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
-              </Link>
+              </Link> */}
             </div>
             
             {/* Navigation links - hidden on mobile */}

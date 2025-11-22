@@ -23,7 +23,7 @@ export default function NavBar() {
   // Navigation links data - simplified to just Documentation and Calculators
   const navLinks: NavLink[] = [
     {
-      href: "/docs",
+      href: "/",
       label: "Documentation",
       about: "Browse comprehensive guides and documentation."
     },

@@ -23,6 +23,7 @@ export default function Home() {
       <StarryBackground />
       <div className="relative z-10 flex min-h-dvh items-start justify-center py-24 px-6 sm:py-24 md:px-10 md:py-40">
         <div className="w-full max-w-3xl">
+          {/*
           <Image
             src="/Logo.png"
             alt="CubeSource logo"
@@ -31,7 +32,7 @@ export default function Home() {
             className="mb-5 m-[5px] h-auto w-10 md:w-14"
             priority
           />
-          {/*<p
+          <p
             className={`${outfit.className} mb-7 text-md text-white md:text-base`}
           >
             A free resource offered by CubeSource, complete with visuals, diagrams and tutorials.

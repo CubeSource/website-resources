@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, ReactNode } from "react";
 import { vt323 } from "../lib/fonts";
+import { categories } from "../data/categories";
 
 interface NavLink {
   href: string;
@@ -19,20 +20,53 @@ interface NavLinkProps {
   children: ReactNode;
 }
 
+// BACKUP: Original navigation logic that derived navLinks from categories
+// Navigation links data - derived from categories
+const getNavLinksFromCategories = (): NavLink[] => {
+  return categories.map((category) => {
+    // Shorten category names for nav
+    const shortNames: Record<string, string> = {
+      "Getting Started": "Introduction",
+      "Structure": "Structure",
+      "Hold-Down Release Mechanisms": "Mechanisms",
+      "Electrical Power Systems (EPS)": "Electrical",
+      "Assembly": "Assembly",
+      "Environmental Testing": "Testing"
+    };
+    
+    // Get the first item's route as the href, or use a hash-based anchor
+    const href = category.items.length > 0 ? category.items[0].route : `#${category.name.toLowerCase().replace(/\s+/g, '-')}`;
+    
+    return {
+      href,
+      label: shortNames[category.name] || category.name,
+      about: category.items.length > 0 ? category.items[0].description : undefined
+    };
+  });
+};
+
 export default function NavBar() {
-  // Navigation links data - simplified to just Documentation and Calculators
-  const navLinks: NavLink[] = [
-    {
-      href: "/docs",
-      label: "Documentation",
-      about: "Browse comprehensive guides and documentation."
-    },
-    {
-      href: "/calculators",
-      label: "Calculators",
-      about: "Access useful calculation tools and utilities."
-    }
-  ];
+  // Navigation links data - derived from categories
+  const navLinks: NavLink[] = categories.map((category) => {
+    // Shorten category names for nav
+    const shortNames: Record<string, string> = {
+      "Getting Started": "Introduction",
+      "Structure": "Structure",
+      "Hold-Down Release Mechanisms": "Mechanisms",
+      "Electrical Power Systems (EPS)": "Electrical",
+      "Assembly": "Assembly",
+      "Environmental Testing": "Testing"
+    };
+    
+    // Get the first item's route as the href, or use a hash-based anchor
+    const href = category.items.length > 0 ? category.items[0].route : `#${category.name.toLowerCase().replace(/\s+/g, '-')}`;
+    
+    return {
+      href,
+      label: shortNames[category.name] || category.name,
+      about: category.items.length > 0 ? category.items[0].description : undefined
+    };
+  });
 
   // Social media links
   const socialLinks: SocialLink[] = [
@@ -244,3 +278,4 @@ export default function NavBar() {
     </div>
   );
 }
+

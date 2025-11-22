@@ -156,7 +156,9 @@ export default function NavBar() {
           {/* Header row with logo and menu button */}
           <div className={`flex justify-between items-center w-full ${menuOpen ? 'px-4 sm:px-6 py-3' : ''}`}>
             <div className="p-[6px] pl-[4px] mt-[-1px]">
-              <Image src="/Logo.png" alt="UCDevs logo" width={15} height={22} className="!w-[15px] !h-[22px]" style={{ width: '15px', height: '22px' }} />
+              <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer">
+                <Image src="/Logo.png" alt="UCDevs logo" width={15} height={22} className="!w-[15px] !h-[22px]" style={{ width: '15px', height: '22px' }} />
+              </a>
             </div>
             
             {/* Navigation links - hidden on mobile */}

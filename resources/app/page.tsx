@@ -93,7 +93,7 @@ export default function Home() {
                         </span>
                       </div>
                       <span
-                        className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
+                        className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 delay-[300ms] ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
                           openRoute === item.route
                             ? " mt-2 max-h-40 opacity-100"
                             : ""

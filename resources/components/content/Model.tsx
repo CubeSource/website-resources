@@ -185,18 +185,18 @@ function ModelViewer({ src }: { src: string }) {
   );
 }
 
-function ModelCanvas({ src }: { src: string }) {
+function ModelCanvas({ src, onControlsReady, onCameraReady }: { src: string; onControlsReady: (controls: any) => void; onCameraReady: (camera: any) => void }) {
   return (
     <Canvas
-      gl={{ 
-        antialias: true, 
-        alpha: false,
-        powerPreference: "high-performance",
-        depth: true,
-        stencil: false,
-        logarithmicDepthBuffer: false
-      }}
-      onCreated={({ gl: renderer }) => {
+        gl={{ 
+          antialias: true, 
+          alpha: false,
+          powerPreference: "high-performance",
+          depth: true,
+          stencil: false,
+          logarithmicDepthBuffer: false
+        }}
+      onCreated={({ gl: renderer, camera }) => {
         // Disable face culling globally via the renderer's context
         const gl = renderer.getContext() as WebGLRenderingContext;
         if (gl) {
@@ -204,6 +204,7 @@ function ModelCanvas({ src }: { src: string }) {
           // Also ensure it stays disabled
           renderer.setRenderTarget(null);
         }
+        onCameraReady(camera);
       }}
       style={{ width: '100%', height: '100%', display: 'block' }}
       camera={{ position: [0, 0, 5], fov: 50 }}
@@ -222,6 +223,7 @@ function ModelCanvas({ src }: { src: string }) {
         <ModelViewer src={src} />
       </Suspense>
       <OrbitControls
+        ref={onControlsReady}
         enablePan={true}
         enableZoom={true}
         enableRotate={true}
@@ -235,6 +237,44 @@ function ModelCanvas({ src }: { src: string }) {
 
 export default function Model({ src, alt, children }: ModelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const controlsRef = useRef<any>(null);
+  const cameraRef = useRef<any>(null);
+  
+  const handleZoomIn = () => {
+    if (cameraRef.current && controlsRef.current) {
+      // Get current distance from target
+      const target = controlsRef.current.target;
+      const currentDistance = cameraRef.current.position.distanceTo(target);
+      
+      // Calculate direction from camera to target
+      const direction = new Vector3()
+        .subVectors(cameraRef.current.position, target)
+        .normalize();
+      
+      // Move camera closer (zoom in)
+      const newDistance = Math.max(currentDistance * 0.8, 0.5);
+      cameraRef.current.position.copy(target).add(direction.multiplyScalar(newDistance));
+      controlsRef.current.update();
+    }
+  };
+  
+  const handleZoomOut = () => {
+    if (cameraRef.current && controlsRef.current) {
+      // Get current distance from target
+      const target = controlsRef.current.target;
+      const currentDistance = cameraRef.current.position.distanceTo(target);
+      
+      // Calculate direction from camera to target
+      const direction = new Vector3()
+        .subVectors(cameraRef.current.position, target)
+        .normalize();
+      
+      // Move camera farther (zoom out)
+      const newDistance = Math.min(currentDistance * 1.25, 20);
+      cameraRef.current.position.copy(target).add(direction.multiplyScalar(newDistance));
+      controlsRef.current.update();
+    }
+  };
 
   return (
     <div className="w-full my-6">
@@ -252,15 +292,41 @@ export default function Model({ src, alt, children }: ModelProps) {
           }
         >
           <div className="w-full h-full absolute inset-0">
-            <ModelCanvas src={`/models/${src}`} />
+            <ModelCanvas 
+              src={`/models/${src}`} 
+              onControlsReady={(controls) => {
+                controlsRef.current = controls;
+              }}
+              onCameraReady={(camera) => {
+                cameraRef.current = camera;
+              }}
+            />
           </div>
         </Suspense>
       </div>
-      {children && (
-        <p className="text-sm text-zinc-400 mt-2 text-left">
-          {children}
-        </p>
-      )}
+      <div className="flex justify-between items-center mt-2">
+        {children && (
+          <p className="text-sm text-zinc-400 text-left">
+            {children}
+          </p>
+        )}
+        <div className="flex gap-2 ml-auto">
+          <button
+            onClick={handleZoomOut}
+            className={`${vt323.className} px-3 py-1.5 bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 text-white text-sm hover:bg-opacity-100 transition-colors`}
+            aria-label="Zoom out"
+          >
+            −
+          </button>
+          <button
+            onClick={handleZoomIn}
+            className={`${vt323.className} px-3 py-1.5 bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 text-white text-sm hover:bg-opacity-100 transition-colors`}
+            aria-label="Zoom in"
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

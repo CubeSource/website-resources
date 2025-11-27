@@ -8,6 +8,7 @@ import Header from "../../../components/content/Header";
 import Text from "../../../components/content/Text";
 import Section from "../../../components/content/Section";
 import Image from "../../../components/content/Image";
+import Model from "../../../components/content/Model";
 
 export default function FoundationsPage() {
   return (
@@ -22,6 +23,9 @@ export default function FoundationsPage() {
         <Image src="CubeSat.jpg" alt="CubeSat diagram">
           A 1U CubeSat being handled by a NASA technician.
         </Image>
+        <Model src="BurnwingV2.glb" alt="Burnwing V2 model">
+          Optional caption text here
+        </Model>
       </div>
       
       <section className="space-y-4">

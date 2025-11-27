@@ -3,7 +3,7 @@
 import { Suspense, ReactNode, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Mesh, Box3, Vector3, MeshStandardMaterial } from "three";
+import { Mesh, Box3, Vector3, MeshStandardMaterial, DoubleSide } from "three";
 import { vt323 } from "../../lib/fonts";
 
 interface ModelProps {
@@ -72,7 +72,7 @@ function ModelViewer({ src }: { src: string }) {
           mesh.geometry.computeBoundingBox();
         }
         
-        // Fix materials - force them to be visible
+        // Fix materials - force them to be visible and double-sided
         if (mesh.material) {
           if (Array.isArray(mesh.material)) {
             mesh.material.forEach((mat: any) => {
@@ -80,17 +80,19 @@ function ModelViewer({ src }: { src: string }) {
                 mat.needsUpdate = true;
                 mat.opacity = 1;
                 mat.transparent = false;
+                mat.side = DoubleSide; // Make material double-sided
               }
             });
           } else {
             mesh.material.needsUpdate = true;
             mesh.material.opacity = 1;
             mesh.material.transparent = false;
+            mesh.material.side = DoubleSide; // Make material double-sided
           }
         } else {
           // Add a default material if none exists
           console.warn('Mesh has no material, adding default');
-          mesh.material = new MeshStandardMaterial({ color: 0x888888 });
+          mesh.material = new MeshStandardMaterial({ color: 0x888888, side: DoubleSide });
         }
       }
     });
@@ -130,8 +132,6 @@ function ModelCanvas({ src }: { src: string }) {
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <directionalLight position={[-10, -10, -5]} intensity={0.8} />
       <pointLight position={[0, 0, 5]} intensity={0.5} />
-      <gridHelper args={[10, 10, 0x444444, 0x222222]} />
-      <axesHelper args={[5]} />
       <Suspense fallback={<TestBox />}>
         <ModelViewer src={src} />
       </Suspense>

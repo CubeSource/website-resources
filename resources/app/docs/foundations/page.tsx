@@ -24,7 +24,7 @@ export default function FoundationsPage() {
           A 1U CubeSat being handled by a NASA technician.
         </Image>
         <Model src="BurnwingV2.glb" alt="Burnwing V2 model">
-          Optional caption text here
+          A Burnwing v2 model.
         </Model>
       </div>
       

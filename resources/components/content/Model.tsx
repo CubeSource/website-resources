@@ -210,6 +210,7 @@ function ModelCanvas({ src }: { src: string }) {
       dpr={[1, 2]}
     >
       <color attach="background" args={['#040404']} />
+      <gridHelper args={[10, 10, 0x444444, 0x222222]} position={[0, -1.5, 0]} />
       <ambientLight intensity={1.2} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <directionalLight position={[-10, -10, -5]} intensity={1.5} />

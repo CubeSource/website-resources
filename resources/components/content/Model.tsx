@@ -31,9 +31,46 @@ function TestBox() {
   );
 }
 
+// Component to ensure materials stay double-sided
+function EnsureDoubleSided({ scene }: { scene: any }) {
+  useFrame(() => {
+    if (scene) {
+      scene.traverse((child: any) => {
+        if (child.isMesh && child.material) {
+          if (Array.isArray(child.material)) {
+            child.material.forEach((mat: any) => {
+              if (mat && mat.side !== DoubleSide) {
+                mat.side = DoubleSide;
+                mat.needsUpdate = true;
+              }
+            });
+          } else {
+            if (child.material.side !== DoubleSide) {
+              child.material.side = DoubleSide;
+              child.material.needsUpdate = true;
+            }
+          }
+        }
+      });
+    }
+  });
+  return null;
+}
+
 function ModelViewer({ src }: { src: string }) {
   const { scene: originalScene } = useGLTF(src);
   const [processedScene, setProcessedScene] = useState<any>(null);
+  const meshRef = useRef<any>(null);
+
+  // Keep face culling disabled on every frame
+  useFrame(({ gl }) => {
+    if (gl) {
+      const context = gl.getContext() as WebGLRenderingContext;
+      if (context) {
+        context.disable(context.CULL_FACE);
+      }
+    }
+  });
 
   useEffect(() => {
     if (!originalScene) return;
@@ -67,33 +104,57 @@ function ModelViewer({ src }: { src: string }) {
         meshCount++;
         const mesh = child as any;
         
-        // Make sure geometry is visible
+        // Make sure geometry is visible and normals are correct
         if (mesh.geometry) {
           mesh.geometry.computeBoundingBox();
+          // Recalculate normals to fix culling issues
+          if (mesh.geometry.attributes.normal) {
+            mesh.geometry.computeVertexNormals();
+            mesh.geometry.attributes.normal.needsUpdate = true;
+          } else {
+            // If no normals exist, compute them
+            mesh.geometry.computeVertexNormals();
+          }
         }
         
         // Fix materials - force them to be visible and double-sided
+        // Always create new materials to ensure they're properly set
         if (mesh.material) {
           if (Array.isArray(mesh.material)) {
-            mesh.material.forEach((mat: any) => {
+            mesh.material = mesh.material.map((mat: any) => {
               if (mat) {
-                mat.needsUpdate = true;
-                mat.opacity = 1;
-                mat.transparent = false;
-                mat.side = DoubleSide; // Make material double-sided
+                // Create a new material based on the original but with DoubleSide
+                const newMat = mat.clone();
+                newMat.side = DoubleSide;
+                newMat.opacity = 1;
+                newMat.transparent = false;
+                newMat.needsUpdate = true;
+                // Force update
+                if (newMat.map) newMat.map.needsUpdate = true;
+                return newMat;
               }
+              return new MeshStandardMaterial({ color: 0x888888, side: DoubleSide });
             });
           } else {
-            mesh.material.needsUpdate = true;
-            mesh.material.opacity = 1;
-            mesh.material.transparent = false;
-            mesh.material.side = DoubleSide; // Make material double-sided
+            const newMat = mesh.material.clone();
+            newMat.side = DoubleSide;
+            newMat.opacity = 1;
+            newMat.transparent = false;
+            newMat.needsUpdate = true;
+            if (newMat.map) newMat.map.needsUpdate = true;
+            mesh.material = newMat;
           }
         } else {
           // Add a default material if none exists
-          console.warn('Mesh has no material, adding default');
           mesh.material = new MeshStandardMaterial({ color: 0x888888, side: DoubleSide });
         }
+        
+        // Also ensure the mesh itself is set up correctly
+        mesh.frustumCulled = false; // Disable frustum culling
+        mesh.matrixAutoUpdate = true;
+        mesh.visible = true; // Ensure mesh is visible
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
       }
     });
     
@@ -116,22 +177,46 @@ function ModelViewer({ src }: { src: string }) {
     return <TestBox />;
   }
 
-  return <primitive object={processedScene} />;
+  return (
+    <>
+      <EnsureDoubleSided scene={processedScene} />
+      <primitive ref={meshRef} object={processedScene} />
+    </>
+  );
 }
 
 function ModelCanvas({ src }: { src: string }) {
   return (
     <Canvas
-      gl={{ antialias: true, alpha: false }}
+      gl={{ 
+        antialias: true, 
+        alpha: false,
+        powerPreference: "high-performance",
+        depth: true,
+        stencil: false,
+        logarithmicDepthBuffer: false
+      }}
+      onCreated={({ gl: renderer }) => {
+        // Disable face culling globally via the renderer's context
+        const gl = renderer.getContext() as WebGLRenderingContext;
+        if (gl) {
+          gl.disable(gl.CULL_FACE);
+          // Also ensure it stays disabled
+          renderer.setRenderTarget(null);
+        }
+      }}
       style={{ width: '100%', height: '100%', display: 'block' }}
       camera={{ position: [0, 0, 5], fov: 50 }}
       dpr={[1, 2]}
     >
       <color attach="background" args={['#040404']} />
-      <ambientLight intensity={0.8} />
+      <ambientLight intensity={1.2} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
-      <directionalLight position={[-10, -10, -5]} intensity={0.8} />
-      <pointLight position={[0, 0, 5]} intensity={0.5} />
+      <directionalLight position={[-10, -10, -5]} intensity={1.5} />
+      <directionalLight position={[0, 10, 0]} intensity={1.0} />
+      <directionalLight position={[0, -10, 0]} intensity={1.0} />
+      <pointLight position={[0, 0, 5]} intensity={0.8} />
+      <pointLight position={[0, 0, -5]} intensity={0.8} />
       <Suspense fallback={<TestBox />}>
         <ModelViewer src={src} />
       </Suspense>

@@ -57,7 +57,7 @@ function EnsureDoubleSided({ scene }: { scene: any }) {
   return null;
 }
 
-function ModelViewer({ src }: { src: string }) {
+function ModelViewer(/models/${src}: { src: string }) {
   const { scene: originalScene } = useGLTF(src);
   const [processedScene, setProcessedScene] = useState<any>(null);
   const meshRef = useRef<any>(null);

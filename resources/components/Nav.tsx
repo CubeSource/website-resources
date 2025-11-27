@@ -123,7 +123,7 @@ export default function NavBar() {
   const containerClasses = 
     menuOpen 
       ? 'bottom-0 px-0 py-0' 
-      : 'px-4 sm:px-8 py-4 sm:py-8 md:px-16';
+      : 'px-4 sm:px-8 py-2 sm:py-3 md:px-16';
       
   // Determine navbar classes based on menu state
   const navbarClasses = 

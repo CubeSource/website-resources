@@ -16,7 +16,7 @@ export default function FramesPage() {
           Frames
         </Title>
         <Header>
-          Explore structural frame selections, materials, and load paths for CubeSat primary structures.
+          Explore structural frame selections, materials, and load paths for CubeSat main structures.
         </Header>
       </div>
       

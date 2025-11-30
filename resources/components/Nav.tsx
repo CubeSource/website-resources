@@ -31,6 +31,11 @@ export default function NavBar() {
       href: "/calculators",
       label: "Calculators",
       about: "Access useful calculation tools and utilities."
+    },
+    {
+      href: "/resources",
+      label: "Resources",
+      about: "Documents by organizations like SpaceX and NASA detailing standards."
     }
   ];
 

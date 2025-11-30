@@ -2,9 +2,19 @@
 
 import { Suspense, ReactNode, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useFBX } from "@react-three/drei";
+import '@react-three/fiber';
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Mesh, Box3, Vector3, MeshStandardMaterial, DoubleSide } from "three";
 import { vt323 } from "../../lib/fonts";
+
+declare global {
+  namespace JSX {
+    // Allow React Three Fiber primitives (and other three.js intrinsic elements) in TSX
+    interface IntrinsicElements {
+      [name: string]: any;
+    }
+  }
+}
 
 interface ModelProps {
   src: string;

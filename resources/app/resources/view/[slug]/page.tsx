@@ -38,15 +38,19 @@ export default function PdfViewerPage() {
     );
   }
 
-  const pdfSrc = pdfUrl(filename);
+  // Use GitHub raw URL if configured, otherwise fall back to local public path
+  const githubUrl = pdfUrl(filename);
+  const pdfSrc = githubUrl.startsWith('#') 
+    ? `/pdfs/${filename}` 
+    : githubUrl;
 
   return (
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <NavBar />
       <StarryBackground />
-      <div className="relative z-10 min-h-dvh">
-        {/* Header with back button */}
-        <div className="sticky top-0 z-20 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
+      <div className="relative z-10 min-h-dvh pt-16">
+        {/* Header with back button - positioned below NavBar */}
+        <div className="fixed top-16 left-0 right-0 z-20 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <Link
               href="/resources"
@@ -62,12 +66,11 @@ export default function PdfViewerPage() {
         </div>
 
         {/* PDF Viewer */}
-        <div className="w-full" style={{ height: 'calc(100dvh - 73px)' }}>
+        <div className="w-full pt-16" style={{ height: 'calc(100dvh - 64px)' }}>
           <iframe
             src={pdfSrc}
             className="w-full h-full border-0"
             title={filename}
-            style={{ minHeight: '600px' }}
           />
         </div>
       </div>

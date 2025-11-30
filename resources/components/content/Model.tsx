@@ -2,7 +2,7 @@
 
 import { Suspense, ReactNode, useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useFBX } from "@react-three/drei";
 import { Mesh, Box3, Vector3, MeshStandardMaterial, DoubleSide } from "three";
 import { vt323 } from "../../lib/fonts";
 
@@ -58,7 +58,8 @@ function EnsureDoubleSided({ scene }: { scene: any }) {
 }
 
 function ModelViewer({ src }: { src: string }) {
-  const { scene: originalScene } = useGLTF(src);
+  // Load FBX model
+  const originalScene = useFBX(src);
   const [processedScene, setProcessedScene] = useState<any>(null);
   const meshRef = useRef<any>(null);
 
@@ -211,7 +212,6 @@ function ModelCanvas({ src, onControlsReady, onCameraReady }: { src: string; onC
       dpr={[1, 2]}
     >
       <color attach="background" args={['#040404']} />
-      <gridHelper args={[10, 10, 0x444444, 0x222222]} position={[0, -1.5, 0]} />
       <ambientLight intensity={1.2} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <directionalLight position={[-10, -10, -5]} intensity={1.5} />

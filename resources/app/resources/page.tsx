@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useState } from "react";
 import StarryBackground from "../../components/StarryBackground";
 import NavBar from "../../components/Nav";
@@ -84,41 +85,77 @@ export default function ResourcesPage() {
                       >
                         {item.description}
                         <br />
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`${vt323.className} cursor-pointer group/button mt-3 relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                          }}
-                        >
-                          <span 
-                            data-overlay
-                            className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
-                          />
-                          <span 
-                            className="relative z-10 inline-block"
-                            onMouseEnter={(e) => {
-                              const button = e.currentTarget.closest('a');
-                              const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
-                              if (overlay) {
-                                overlay.classList.remove('scale-x-0');
-                                overlay.classList.add('scale-x-100');
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              const button = e.currentTarget.closest('a');
-                              const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
-                              if (overlay) {
-                                overlay.classList.remove('scale-x-100');
-                                overlay.classList.add('scale-x-0');
-                              }
+                        {item.url.startsWith('/') ? (
+                          <Link
+                            href={item.url}
+                            className={`${vt323.className} cursor-pointer group/button mt-3 relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden`}
+                            onClick={(event) => {
+                              event.stopPropagation();
                             }}
                           >
-                            View Resource
-                          </span>
-                        </a>
+                            <span 
+                              data-overlay
+                              className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
+                            />
+                            <span 
+                              className="relative z-10 inline-block"
+                              onMouseEnter={(e) => {
+                                const button = e.currentTarget.closest('a');
+                                const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                                if (overlay) {
+                                  overlay.classList.remove('scale-x-0');
+                                  overlay.classList.add('scale-x-100');
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                const button = e.currentTarget.closest('a');
+                                const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                                if (overlay) {
+                                  overlay.classList.remove('scale-x-100');
+                                  overlay.classList.add('scale-x-0');
+                                }
+                              }}
+                            >
+                              View Resource
+                            </span>
+                          </Link>
+                        ) : (
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${vt323.className} cursor-pointer group/button mt-3 relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden`}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                            }}
+                          >
+                            <span 
+                              data-overlay
+                              className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
+                            />
+                            <span 
+                              className="relative z-10 inline-block"
+                              onMouseEnter={(e) => {
+                                const button = e.currentTarget.closest('a');
+                                const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                                if (overlay) {
+                                  overlay.classList.remove('scale-x-0');
+                                  overlay.classList.add('scale-x-100');
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                const button = e.currentTarget.closest('a');
+                                const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                                if (overlay) {
+                                  overlay.classList.remove('scale-x-100');
+                                  overlay.classList.add('scale-x-0');
+                                }
+                              }}
+                            >
+                              View Resource
+                            </span>
+                          </a>
+                        )}
                       </span>
                     </div>
                   ))}

@@ -1,7 +1,10 @@
+import { pdfUrl } from "../lib/github-raw";
+
 export type ResourceItem = {
   title: string;
   description: string;
   url: string;
+  pdfFilename?: string; // If set, this is a PDF that should be viewed on-site
 };
 
 export type ResourceCategory = {
@@ -25,16 +28,23 @@ export const resourceCategories: ResourceCategory[] = [
           "Official specification document defining CubeSat form factors, deployment mechanisms, and interface requirements for launch integration.",
         url: "https://www.cubesat.org/specification",
       },
+      // Example: Using GitHub raw URL for a PDF stored in public/pdfs/
+      // {
+      //   title: "NASA Standard Document",
+      //   description: "Example PDF stored in the repo and served via GitHub CDN.",
+      //   url: pdfUrl("nasa-standard.pdf"),
+      // },
     ],
   },
   {
     name: "SpaceX Standards",
     items: [
       {
-        title: "Rideshare User's Guide",
+        title: "Rideshare Payload User's Guide",
         description:
           "Complete guide for integrating CubeSats and small satellites on SpaceX rideshare missions, including mechanical, electrical, and operational requirements.",
-        url: "https://www.spacex.com/rideshare",
+        url: "/resources/view/spacex-rideshare-payload-users-guide",
+        pdfFilename: "SpaceX_Rideshare_Payload_Users_Guide.pdf",
       },
       {
         title: "Payload Integration Requirements",

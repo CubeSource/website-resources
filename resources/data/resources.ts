@@ -28,12 +28,6 @@ export const resourceCategories: ResourceCategory[] = [
           "Official specification document defining CubeSat form factors, deployment mechanisms, and interface requirements for launch integration.",
         url: "https://www.cubesat.org/specification",
       },
-      // Example: Using GitHub raw URL for a PDF stored in public/pdfs/
-      // {
-      //   title: "NASA Standard Document",
-      //   description: "Example PDF stored in the repo and served via GitHub CDN.",
-      //   url: pdfUrl("nasa-standard.pdf"),
-      // },
     ],
   },
   {

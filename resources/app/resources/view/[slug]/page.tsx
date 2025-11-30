@@ -39,10 +39,40 @@ export default function PdfViewerPage() {
   }
 
   // Use GitHub raw URL if configured, otherwise fall back to local public path
+  // TODO: Configure NEXT_PUBLIC_GITHUB_REPO to avoid Vercel bandwidth usage
   const githubUrl = pdfUrl(filename);
   const pdfSrc = githubUrl.startsWith('#') 
     ? `/pdfs/${filename}` 
     : githubUrl;
+
+  // TODO: Re-enable this check once GitHub repo is configured
+  // // Check if GitHub repo is configured
+  // if (pdfSrc.startsWith('#')) {
+  //   return (
+  //     <div className="relative min-h-dvh bg-black text-zinc-200">
+  //       <NavBar />
+  //       <StarryBackground />
+  //       <div className="relative z-10 flex min-h-dvh items-center justify-center py-24 px-6">
+  //         <div className="text-center max-w-2xl">
+  //           <h1 className={`${vt323.className} text-4xl text-white mb-4`}>
+  //             Configuration Required
+  //           </h1>
+  //           <p className="text-zinc-400 mb-6">
+  //             GitHub repository not configured. To serve PDFs without consuming Vercel bandwidth, 
+  //             set <code className="text-zinc-300">NEXT_PUBLIC_GITHUB_REPO</code> in your <code className="text-zinc-300">.env.local</code> file 
+  //             (e.g., &quot;username/repo&quot;).
+  //           </p>
+  //           <Link
+  //             href="/resources"
+  //             className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
+  //           >
+  //             ← Back to resources
+  //           </Link>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="relative min-h-dvh bg-black text-zinc-200">

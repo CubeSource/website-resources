@@ -1,12 +1,12 @@
 'use client';
 
 import Link from "next/link";
-import { vt323 } from "../../../lib/fonts";
-import Content from "../../../components/content/Content";
-import Title from "../../../components/content/Title";
-import Header from "../../../components/content/Header";
-import Text from "../../../components/content/Text";
-import Section from "../../../components/content/Section";
+import { vt323 } from "../../lib/fonts";
+import Content from "../../components/content/Content";
+import Title from "../../components/content/Title";
+import Header from "../../components/content/Header";
+import Text from "../../components/content/Text";
+import Section from "../../components/content/Section";
 
 export default function ResourcesPage() {
   return (

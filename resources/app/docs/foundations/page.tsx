@@ -23,7 +23,7 @@ export default function FoundationsPage() {
         <Image src="CubeSat.jpg" alt="CubeSat diagram">
           A 1U CubeSat being handled by a NASA technician.
         </Image>
-        <Model src="Burnwing-EngV2.glb" alt="Burnwing V2 model">
+        <Model src="Burnwing-EngV2.glb" alt="Burnwing V2 Eng model">
           A Burnwing v2 model.
         </Model>
       </div>

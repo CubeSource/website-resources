@@ -24,7 +24,7 @@ export default function NavBar() {
   const navLinks: NavLink[] = [
     {
       href: "/",
-      label: "Documentation",
+      label: "Home",
       about: "Browse comprehensive guides and documentation."
     },
     {
@@ -162,7 +162,7 @@ export default function NavBar() {
           <div className={`flex justify-between items-center w-full ${menuOpen ? 'px-4 sm:px-6 py-3' : ''}`}>
             <div className="flex items-center gap-2 p-[6px] pl-[4px] mt-[-1px]">
               <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer">
-                <Image src="/Logo.png" alt="UCDevs logo" width={15} height={22} className="!w-[15px] !h-[22px]" style={{ width: '15px', height: '22px' }} />
+                <Image src="/Logo.png" alt="UCDevs logo" width={20} height={30} className="!w-[20px] !h-[30px]" style={{ width: '15px', height: '22px' }} />
               </a>
               {/* <Link 
                 href="/" 

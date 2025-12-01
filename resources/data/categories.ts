@@ -51,7 +51,7 @@ export const categories: Category[] = [
         title: "Thermal Knives / Burnwires",
         description:
           "Design and qualify nichrome burnwire systems, from power sizing to redundancy planning.",
-        route: "/docs/hdrm/thermal-knives",
+        route: "/docs/hdrm/burnwires",
       },
       {
         title: "Shape Memory Alloy",

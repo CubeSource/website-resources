@@ -1,6 +1,6 @@
-import { Outfit, VT323 } from "next/font/google";
+import { Outfit, Poppins } from "next/font/google";
 
-export const vt323 = VT323({
+export const vt323 = Poppins({
   weight: "400",
   subsets: ["latin"],
   display: "swap",

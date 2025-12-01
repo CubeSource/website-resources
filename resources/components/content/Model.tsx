@@ -34,7 +34,7 @@ function TestBox() {
   });
 
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
+    <mesh ref={meshRef} position={[0, -1, 1]}>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="orange" />
     </mesh>
@@ -218,17 +218,17 @@ function ModelCanvas({ src, onControlsReady, onCameraReady }: { src: string; onC
         onCameraReady(camera);
       }}
       style={{ width: '100%', height: '100%', display: 'block' }}
-      camera={{ position: [0, 0, 5], fov: 50 }}
+      camera={{ position: [0, -5, 5], fov: 15 }}
       dpr={[1, 2]}
     >
       <color attach="background" args={['#040404']} />
-      <ambientLight intensity={1.2} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} />
-      <directionalLight position={[-10, -10, -5]} intensity={1.5} />
-      <directionalLight position={[0, 10, 0]} intensity={1.0} />
-      <directionalLight position={[0, -10, 0]} intensity={1.0} />
+      <ambientLight intensity={4.5} />
+      <directionalLight position={[10, 10, 5]} intensity={2.5} />
+      <directionalLight position={[-10, -10, -5]} intensity={2.5} />
+      <directionalLight position={[0, 10, 0]} intensity={2.0} />
+      <directionalLight position={[0, -10, 0]} intensity={2.0} />
       <pointLight position={[0, 0, 5]} intensity={0.8} />
-      <pointLight position={[0, 0, -5]} intensity={0.8} />
+      <pointLight position={[0, -10, 10]} intensity={3.8} />
       <Suspense fallback={<TestBox />}>
         <ModelViewer src={src} />
       </Suspense>
@@ -249,6 +249,7 @@ export default function Model({ src, alt, children }: ModelProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsRef = useRef<any>(null);
   const cameraRef = useRef<any>(null);
+  
   
   const handleZoomIn = () => {
     if (cameraRef.current && controlsRef.current) {

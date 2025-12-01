@@ -44,11 +44,11 @@ export default function Home() {
                 className="space-y-3 md:space-y-4 first:mt-0 mt-10"
               >
                 <h2
-                  className={`${vt323.className} text-xl text-zinc-400 mt-4 mb-1`}
+                  className={`${vt323.className} text-md text-zinc-400 mt-4 mb-1`}
                 >
                   {category.name}
                 </h2>
-                <div className="space-y-3 md:space-y-6">
+                <div className="space-y-4 md:space-y-3">
                   {category.items.map((item) => (
                     <div
                       key={item.route}
@@ -66,12 +66,13 @@ export default function Home() {
                     >
                       <div className="flex items-center gap-3">
                         <span
-                          className={`${vt323.className} inline-block text-3xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
+                          className={`${vt323.className} inline-block text-2xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-4xl${
                             openRoute === item.route ? " text-zinc-200" : ""
                           }`}
                         >
                           {item.title}
                         </span>
+                        <span className="sr-only">A 1U CubeSat being handled by a NASA technician.</span>
                         <span
                           className={`pointer-events-none inline-flex h-6 w-4 items-center justify-center text-zinc-300 transition-opacity duration-300 ease-out${
                             openRoute === item.route ? " opacity-100" : " opacity-0"
@@ -94,7 +95,7 @@ export default function Home() {
                         </span>
                       </div>
                       <span
-                        className={`mt-0 block max-h-0 max-w-xl overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 delay-[300ms] ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
+                        className={`mt-0 block max-h-0 max-content overflow-hidden text-sm text-zinc-400 opacity-0 transition-all duration-300 delay-[300ms] ease-out group-hover:mt-2 group-hover:max-h-40 group-hover:opacity-100 md:text-base${
                           openRoute === item.route
                             ? " mt-2 max-h-40 opacity-100"
                             : ""

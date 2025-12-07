@@ -23,12 +23,12 @@ export default function NavBar() {
   // Navigation links data - simplified to just Documentation and Calculators
   const navLinks: NavLink[] = [
     {
-      href: "/home",
+      href: "https://cubesource.space/",
       label: "Home",
       about: "Main site"
     },
     {
-      href: "/resources",
+      href: "https://learn.cubesource.space/",
       label: "Resource Center",
       about: "Browse comprehensive guides and documentation."
     },
@@ -38,7 +38,7 @@ export default function NavBar() {
       about: "Access useful calculation tools and utilities."
     },
     {
-      href: "/documents",
+      href: "/resources",
       label: "Documents",
       about: "Documents by organizations like SpaceX and NASA detailing standards."
     }

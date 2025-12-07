@@ -23,8 +23,13 @@ export default function NavBar() {
   // Navigation links data - simplified to just Documentation and Calculators
   const navLinks: NavLink[] = [
     {
-      href: "/",
+      href: "/home",
       label: "Home",
+      about: "Main site"
+    },
+    {
+      href: "/resources",
+      label: "Resource Center",
       about: "Browse comprehensive guides and documentation."
     },
     {
@@ -33,8 +38,8 @@ export default function NavBar() {
       about: "Access useful calculation tools and utilities."
     },
     {
-      href: "/resources",
-      label: "Resources",
+      href: "/documents",
+      label: "Documents",
       about: "Documents by organizations like SpaceX and NASA detailing standards."
     }
   ];

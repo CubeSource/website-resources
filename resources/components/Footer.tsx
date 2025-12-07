@@ -66,50 +66,53 @@ const Footer: React.FC = () => {
           {/* Column 3: Subscribe (Span 4) */}
           <div className="lg:col-span-4 flex flex-col items-center pt-2">
             <h3 className="text-xl text-[#a0a0a0] font-normal mb-8 text-center w-full">Subscribe for exclusive updates</h3>
-            <form action="https://www.cubesource.space/_functions/submitForm" method="POST" className="w-full max-w-[480px]">
-              <div className="flex flex-col gap-1 w-full">
-                <label htmlFor="email" className="text-sm text-white ml-1">Email *</label>
-                <div className="flex w-full gap-3 h-12">
+            <form action="https://www.cubesource.space/_functions/submitForm" method="POST" className="w-full flex flex-col items-center">
+              
+              <div className="w-full max-w-[300px] flex flex-col gap-4">
+                <div className="flex flex-col gap-1 w-full">
+                  <label htmlFor="email" className="text-sm text-white">Email *</label>
                   <input 
                     id="email"
                     type="email" 
                     name="email" 
                     required 
                     placeholder="email@example.com" 
-                    className="flex-1 bg-white text-black px-4 py-2 text-sm focus:outline-none placeholder-gray-500 border border-transparent focus:border-blue-400" 
+                    className="w-full h-10 bg-white text-black px-4 text-sm focus:outline-none placeholder-gray-500 border border-transparent focus:border-blue-400" 
                   />
-                  <button 
-                    type="submit" 
-                    className="bg-white text-black px-6 py-2 text-sm font-normal hover:bg-gray-100 transition-colors whitespace-nowrap"
-                  >
-                    Join Our Mailing List
-                  </button>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full h-10 bg-white text-black text-sm font-normal hover:bg-gray-100 transition-colors"
+                >
+                  Join Our Mailing List
+                </button>
+
+                <div className="flex items-start gap-3 mt-1">
+                  <div className="relative flex items-center mt-0.5">
+                    <input 
+                      type="checkbox" 
+                      id="subscribe-check"
+                      className="peer h-5 w-5 appearance-none border border-white bg-transparent checked:bg-white checked:border-white cursor-pointer transition-all" 
+                    />
+                    <svg 
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="4" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <label htmlFor="subscribe-check" className="text-sm text-white font-light cursor-pointer select-none leading-tight">
+                    I want to subscribe to your mailing list.
+                  </label>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 mt-4 ml-1">
-                <div className="relative flex items-center mt-0.5">
-                  <input 
-                    type="checkbox" 
-                    id="subscribe-check"
-                    className="peer h-5 w-5 appearance-none border border-white bg-transparent checked:bg-white checked:border-white cursor-pointer transition-all" 
-                  />
-                  <svg 
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 text-black pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="4" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <label htmlFor="subscribe-check" className="text-sm text-white font-light cursor-pointer select-none leading-tight">
-                  I want to subscribe to your mailing list.
-                </label>
-              </div>
             </form>
           </div>
 

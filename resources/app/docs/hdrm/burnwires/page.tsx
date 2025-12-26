@@ -7,6 +7,7 @@ import Title from "../../../../components/content/Title";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 import Model from "../../../../components/content/Model";
+import ProductLink from "../../../../components/content/ProductLink";
 
 export default function BurnwiresPage() {
   return (
@@ -26,6 +27,8 @@ export default function BurnwiresPage() {
           A burnwire (thermal knife) secures deployable satellite components like antennas or solar panels during launch, releasing them once in space by applying heat to cut or melt the restraining material.
         </Text>
       </section>
+
+      <ProductLink storeUrl="https://store.cubesource.com/burnwire" />
 
       <div className="pt-6">
         <Link 

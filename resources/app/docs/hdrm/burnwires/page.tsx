@@ -28,7 +28,10 @@ export default function BurnwiresPage() {
         </Text>
       </section>
 
-      <ProductLink storeUrl="https://store.cubesource.com/burnwire" />
+      <ProductLink 
+        storeUrl="https://store.cubesource.com/burnwire" 
+        productText="Burnwires are"
+      />
 
       <div className="pt-6">
         <Link 

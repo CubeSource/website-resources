@@ -3,15 +3,49 @@
 import Link from "next/link";
 import { vt323 } from "../../lib/fonts";
 
+/**
+ * ProductLink Component
+ * 
+ * A box component that displays a message about product availability and a link to the CubeSource store.
+ * Used in content pages to promote products available for purchase.
+ * 
+ * @param storeUrl - The URL to the product page on the CubeSource store (required)
+ * @param productText - Optional text to customize the product description. Replaces the entire "This product is" phrase.
+ *                      Defaults to "This product is".
+ *                      Examples: "This burnwire is", "These components are", "This frame is"
+ *                      Text format: "{productText} available on the CubeSource store."
+ * 
+ * @example
+ * // Basic usage with default text
+ * <ProductLink storeUrl="https://store.cubesource.com/product" />
+ * // Displays: "This product is available on the CubeSource store."
+ * 
+ * @example
+ * // With custom product text
+ * <ProductLink 
+ *   storeUrl="https://store.cubesource.com/burnwire" 
+ *   productText="This burnwire is"
+ * />
+ * // Displays: "This burnwire is available on the CubeSource store."
+ * 
+ * @example
+ * // Plural example
+ * <ProductLink 
+ *   storeUrl="https://store.cubesource.com/components" 
+ *   productText="These components are"
+ * />
+ * // Displays: "These components are available on the CubeSource store."
+ */
 interface ProductLinkProps {
   storeUrl: string;
+  productText?: string;
 }
 
-export default function ProductLink({ storeUrl }: ProductLinkProps) {
+export default function ProductLink({ storeUrl, productText = "This product is" }: ProductLinkProps) {
   return (
     <div className="w-full my-6 p-6 bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px]">
       <p className="text-base text-zinc-300 sm:text-lg leading-relaxed mb-4">
-        This product is available on the CubeSource store.
+        {productText} available on the CubeSource store.
       </p>
       <Link
         href={storeUrl}

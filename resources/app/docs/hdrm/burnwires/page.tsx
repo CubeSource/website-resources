@@ -29,7 +29,7 @@ export default function BurnwiresPage() {
       </section>
 
       <ProductLink 
-        storeUrl="https://store.cubesource.com/burnwire" 
+        storeUrl="https://www.cubesource.space/product-page/burnwire-release-mechanism" 
         productText="Burnwires are"
       />
 

@@ -1,277 +1,65 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect, ReactNode } from "react";
-import { vt323 } from "../lib/fonts";
+'use client';
 
-interface NavLink {
-  href: string;
-  label: string;
-  about?: string;
-}
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
-interface SocialLink {
-  href: string;
-  label: string;
-}
+export default function Nav() {
+  const router = useRouter();
+  const [currentPath, setCurrentPath] = useState('');
 
-interface NavLinkProps {
-  href: string;
-  children: ReactNode;
-}
-
-export default function NavBar() {
-  // Navigation links data - simplified to just Documentation and Calculators
-  const navLinks: NavLink[] = [
-    {
-      href: "https://cubesource.space/",
-      label: "Home",
-      about: "Main site"
-    },
-    {
-      href: "https://learn.cubesource.space/",
-      label: "Resource Center",
-      about: "Browse comprehensive guides and documentation."
-    },
-    {
-      href: "/calculators",
-      label: "Calculators",
-      about: "Access useful calculation tools and utilities."
-    },
-    {
-      href: "/resources",
-      label: "Documents",
-      about: "Documents by organizations like SpaceX and NASA detailing standards."
-    }
-  ];
-
-  // Social media links
-  const socialLinks: SocialLink[] = [
-    { href: "https://twitter.com", label: "Twitter" },
-    { href: "https://youtube.com", label: "YouTube" },
-    { href: "https://discord.com", label: "Discord" }
-  ];
-
-  // State to track if mobile menu is open
-  const [menuOpen, setMenuOpen] = useState(false);
-  
-  // State to track scroll direction and nav visibility
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  
-  // Handle scroll detection
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Show nav when scrolling up, hide when scrolling down
-      if (currentScrollY < lastScrollY || currentScrollY < 10) {
-        // Scrolling up or near top
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
-        // Scrolling down
-        setIsVisible(false);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
+    // Get the current pathname from the router
+    setCurrentPath(window.location.pathname);
+  }, []);
 
-    // Throttle scroll events for better performance
-    let ticking = false;
-    const throttledHandleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', throttledHandleScroll);
-    };
-  }, [lastScrollY]);
-  
-  // Prevent scrolling when menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [menuOpen]);
-
-  // Toggle menu function
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const isActive = (href: string) => {
+    return currentPath === href || currentPath.startsWith(href + '/');
   };
 
-  // Custom NavLink component with a white animated underline effect
-  const NavLink = ({ href, children }: NavLinkProps) => {
-    return (
-      <Link 
-        href={href} 
-        className={`${vt323.className} text-white px-4 relative group inline-block`}
-      >
-        <span className="relative inline-block">
-          {children}
-          <span 
-            className="absolute left-0 bottom-[1px] w-full h-0.5 transform scale-x-0 transition-transform duration-300 origin-right group-hover:scale-x-100 bg-white"
-          />
-        </span>
-      </Link>
-    );
-  };
-
-  // Determine container classes based on menu state
-  const containerClasses = 
-    menuOpen 
-      ? 'bottom-0 px-0 py-0' 
-      : 'px-4 sm:px-8 py-2 sm:py-3 md:px-16';
-      
-  // Determine navbar classes based on menu state
-  const navbarClasses = 
-    menuOpen 
-      ? 'w-full h-full rounded-none border-0 pb-16 py-4 px-4'
-      : 'px-4 sm:px-6 py-3 rounded-[0px] w-full sm:w-auto';
-      
-  // Determine menu content classes based on menu state
-  const menuContentClasses = 
-    menuOpen
-      ? 'opacity-100 mt-4 px-4 sm:px-6'
-      : 'max-h-0 opacity-0 mt-0';
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+    { href: '/contact', label: 'Contact' },
+  ];
 
   return (
-    <div 
-      className={`fixed top-0 left-0 right-0 z-50 ${containerClasses}`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.6s cubic-bezier(0.34, 1.1, 0.64, 1)',
-      }}
-    >
-      {/* Mobile and desktop navbar */}
-      <div className={`w-full h-full flex ${menuOpen ? 'items-start' : 'justify-center items-center'}`}>
-        <div 
-          className={`relative flex flex-col bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 transition-all duration-300 ease-in-out ${navbarClasses}`}
-          style={menuOpen ? {
-            background: 'linear-gradient(to top, #0a0a0a 0%, rgba(4, 4, 4, 0.9) 15%, rgba(4, 4, 4, 0.9) 100%)'
-          } : {}}
-        >
-          {/* Header row with logo and menu button */}
-          <div className={`flex justify-between items-center w-full ${menuOpen ? 'px-4 sm:px-6 py-3' : ''}`}>
-            <div className="flex items-center gap-2 p-[6px] pl-[4px] mt-[-1px]">
-              <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer">
-                <Image src="/Logo.png" alt="UCDevs logo" width={20} height={30} className="!w-[20px] !h-[30px]" style={{ width: '15px', height: '22px' }} />
-              </a>
-              {/* <Link 
-                href="/" 
-                className="text-white hover:text-zinc-300 transition-colors duration-300 flex items-center justify-center ml-2"
-                aria-label="Home"
+    <nav className="navbar">
+      <div className="nav-container">
+        <Link href="/" className="nav-logo">
+          CubeSource
+        </Link>
+        <ul className="nav-menu">
+          {navItems.map((item) => (
+            <li key={item.href} className="nav-item">
+              <Link
+                href={item.href}
+                className={`nav-link ${isActive(item.href) ? 'active' : ''}`}
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="1" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  className="w-5 h-5"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-              </Link> */}
-            </div>
-            
-            {/* Navigation links - hidden on mobile */}
-            <nav className="hidden md:flex items-center ml-4 border-l border-white/10 pl-2">
-              {navLinks.map((link, index) => (
-                <NavLink key={index} href={link.href}>
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Mobile menu button with flip animation - fixed width to accommodate both texts */}
-            <button 
-              onClick={toggleMenu} 
-              className={`${vt323.className} text-white md:hidden ml-auto relative h-6 w-16 overflow-hidden text-right`}
-            >
-              <span className={`inline-block w-full transition-transform duration-300 ${menuOpen ? 'transform -translate-y-full opacity-0' : ''}`}>
-                MENU
-              </span>
-              <span className={`absolute inset-0 w-full transition-transform duration-300 ${menuOpen ? 'transform translate-y-0' : 'transform translate-y-full opacity-0'}`}>
-                CLOSE
-              </span>
-            </button>
-          </div>
-
-          {/* Mobile menu - always in DOM but height/opacity animated */}
-          <div 
-            className={`w-full flex-grow overflow-hidden transition-all duration-300 ease-in-out md:hidden ${menuContentClasses}`}
-          >
-            <ul className="flex flex-col pt-2">
-              {navLinks.map((link, index) => (
-                <li 
-                  key={index} 
-                  className={`transform transition-all duration-300 ease-in-out ${
-                    menuOpen
-                      ? 'translate-y-0 opacity-100' 
-                      : 'translate-y-4 opacity-0'
-                  }`}
-                  style={{ 
-                    transitionDelay: menuOpen ? `${(index * 75) + 100}ms` : '0ms'
-                  }}
-                >
-                  <Link 
-                    href={link.href} 
-                    className={`${vt323.className} block py-3 px-2 text-2xl text-white hover:bg-white/10 transition-colors`}
-                    onClick={() => {
-                      // Close menu on navigation
-                      setMenuOpen(false);
-                    }}
-                  >
-                    {link.label}
-                    {link.about && (
-                      <span className={`${vt323.className} block mt-1 text-lg text-gray-400 font-light leading-none`}>
-                        {link.about}
-                      </span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            
-            {/* Social media links row */}
-            {/* <div className={`flex px-2 space-x-8 mt-4 transition-all duration-300 ease-in-out ${
-              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`} style={{ transitionDelay: menuOpen ? '500ms' : '0ms' }}>
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.href}
-                  className={`${vt323.className} text-white text-xl hover:text-white/80 transition-colors duration-300`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    // Prevent immediate closing of menu
-                    e.stopPropagation();
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div> */}
-          </div>
-        </div>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+
+      <style jsx>{`
+        .nav-link {
+          color: inherit;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .nav-link.active {
+          color: red;
+          font-weight: bold;
+        }
+
+        .nav-link:hover {
+          color: red;
+        }
+      `}</style>
+    </nav>
   );
 }

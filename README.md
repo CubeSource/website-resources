@@ -1,3 +1,4 @@
 # website-resources
-Repo for custom Javascript website page:
+Repo for custom javascript resource page:
+
 learn.cubesource.space

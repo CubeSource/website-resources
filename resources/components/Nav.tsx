@@ -1,278 +1,123 @@
-'use client';
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect, ReactNode } from "react";
-import { vt323 } from "../lib/fonts";
-import { usePathname } from "next/navigation";
-
-interface NavLink {
+type NavItem = {
+  title: string;
   href: string;
-  label: string;
-  about?: string;
-}
+  external?: boolean;
+};
 
-interface SocialLink {
-  href: string;
-  label: string;
-}
+const navItems: NavItem[] = [
+  { title: 'Home', href: '/' },
+  { title: 'Docs', href: '/docs' },
+  // example external link; keep external: true for clarity but treat same-origin externals as active
+  { title: 'Resource Center', href: 'https://resources.cubesource.com/', external: true },
+];
 
-interface NavLinkProps {
-  href: string;
-  children: ReactNode;
-}
+const headerStyle: React.CSSProperties = {
+  // Slightly bigger header: increased vertical padding
+  padding: '18px 24px',
+  // Slightly larger and bold header text
+  fontSize: '1.05rem',
+  fontWeight: 700,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+};
 
-export default function NavBar() {
-  // Navigation links data
-  const navLinks: NavLink[] = [
-    {
-      href: "https://cubesource.space/",
-      label: "Home",
-      about: "Main site"
-    },
-    {
-      href: "https://learn.cubesource.space/",
-      label: "Resource Center",
-      about: "Browse comprehensive guides and documentation."
-    },
-    {
-      href: "/calculators",
-      label: "Calculators",
-      about: "Access useful calculation tools and utilities."
-    },
-    {
-      href: "/resources",
-      label: "Documents",
-      about: "Documents by organizations like SpaceX and NASA detailing standards."
-    }
-  ];
+const navStyle: React.CSSProperties = {
+  display: 'flex',
+  gap: '16px',
+  alignItems: 'center',
+};
 
-  // Social media links
-  const socialLinks: SocialLink[] = [
-    { href: "https://twitter.com", label: "Twitter" },
-    { href: "https://youtube.com", label: "YouTube" },
-    { href: "https://discord.com", label: "Discord" }
-  ];
+const linkStyle: React.CSSProperties = {
+  color: 'inherit',
+  textDecoration: 'none',
+  padding: '6px 8px',
+  borderRadius: '4px',
+};
 
-  // State to track if mobile menu is open
-  const [menuOpen, setMenuOpen] = useState(false);
-  
-  // State to track scroll direction and nav visibility
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+const activeStyle: React.CSSProperties = {
+  fontWeight: 700,
+  textDecoration: 'underline',
+};
 
-  // Pathname (client-side) to determine active link
-  const pathname = usePathname();
+export default function Nav() {
+  const router = useRouter();
 
-  // Handle scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Show nav when scrolling up, hide when scrolling down
-      if (currentScrollY < lastScrollY || currentScrollY < 10) {
-        // Scrolling up or near top
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
-        // Scrolling down
-        setIsVisible(false);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    // Throttle scroll events for better performance
-    let ticking = false;
-    const throttledHandleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', throttledHandleScroll);
-    };
-  }, [lastScrollY]);
-  
-  // Prevent scrolling when menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [menuOpen]);
-
-  // Toggle menu function
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  // Check active link: only consider internal routes (starting with '/')
+  // Helper to determine if a link should be marked active.
+  // Treat external links that match the current origin as active.
   const isActive = (href: string) => {
-    if (!href.startsWith("/")) return false;
-    if (!pathname) return false;
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(href + "/");
-  };
+    // If href is a relative path, compare to router.asPath
+    if (href.startsWith('/')) {
+      // Consider path-only match and also when router.asPath starts with the href (for sections)
+      return router.asPath === href || router.asPath.startsWith(href + '/') || (href === '/' && router.asPath === '/');
+    }
 
-  // Custom NavLink component with animated underline and active color
-  const NavLink = ({ href, children }: NavLinkProps) => {
-    const active = isActive(href);
-    return (
-      <Link 
-        href={href} 
-        className={`${vt323.className} px-4 relative group inline-block ${active ? 'text-red-500' : 'text-white'}`}
-      >
-        <span className="relative inline-block">
-          {children}
-          <span 
-            className={`absolute left-0 bottom-[1px] w-full h-0.5 transform transition-transform duration-300 origin-right ${
-              active ? 'scale-x-100 bg-red-500' : 'scale-x-0 group-hover:scale-x-100 bg-white'
-            }`}
-          />
-        </span>
-      </Link>
-    );
-  };
+    // For absolute URLs, try to parse and compare origin + pathname to current location
+    try {
+      // On server-side rendering window is undefined; avoid accessing window in that case
+      const url = new URL(href);
+      if (typeof window !== 'undefined') {
+        // If the external link's origin matches the current origin, treat it like an internal link
+        if (url.origin === window.location.origin) {
+          // Compare pathname + search to router.asPath where possible
+          const hrefPath = url.pathname + (url.search || '');
+          // Exact match or router.asPath starts with the hrefPath
+          return router.asPath === hrefPath || router.asPath.startsWith(hrefPath + '/') || (hrefPath === '/' && router.asPath === '/');
+        }
+      }
+    } catch (e) {
+      // If parsing fails, fall back to string comparison
+      if (router.asPath === href) return true;
+    }
 
-  // Determine container classes based on menu state
-  const containerClasses = 
-    menuOpen 
-      ? 'bottom-0 px-0 py-0' 
-      : 'px-4 sm:px-8 py-2 sm:py-3 md:px-16';
-      
-  // Determine navbar classes based on menu state
-  const navbarClasses = 
-    menuOpen 
-      ? 'w-full h-full rounded-none border-0 pb-16 py-4 px-4'
-      : 'px-4 sm:px-6 py-3 rounded-[0px] w-full sm:w-auto';
-      
-  // Determine menu content classes based on menu state
-  const menuContentClasses = 
-    menuOpen
-      ? 'opacity-100 mt-4 px-4 sm:px-6'
-      : 'max-h-0 opacity-0 mt-0';
+    return false;
+  };
 
   return (
-    <div 
-      className={`fixed top-0 left-0 right-0 z-50 ${containerClasses}`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.6s cubic-bezier(0.34, 1.1, 0.64, 1)',
-      }}
-    >
-      {/* Mobile and desktop navbar */}
-      <div className={`w-full h-full flex ${menuOpen ? 'items-start' : 'justify-center items-center'}`}>
-        <div 
-          className={`relative flex flex-col bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 transition-all duration-300 ease-in-out ${navbarClasses}`}
-          style={menuOpen ? {
-            background: 'linear-gradient(to top, #0a0a0a 0%, rgba(4, 4, 4, 0.9) 15%, rgba(4, 4, 4, 0.9) 100%)'
-          } : {}}
-        >
-          {/* Header row with logo and menu button */}
-          <div className={`flex justify-between items-center w-full ${menuOpen ? 'px-4 sm:px-6 py-3' : ''}`}>
-            <div className="flex items-center gap-2 p-[6px] pl-[4px] mt-[-1px]">
-              <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer">
-                <Image src="/Logo.png" alt="UCDevs logo" width={20} height={30} className="!w-[20px] !h-[30px]" style={{ width: '15px', height: '22px' }} />
-              </a>
-            </div>
-            
-            {/* Navigation links - hidden on mobile */}
-            <nav className="hidden md:flex items-center ml-4 border-l border-white/10 pl-2">
-              {navLinks.map((link, index) => (
-                <NavLink key={index} href={link.href}>
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Mobile menu button with flip animation - fixed width to accommodate both texts */}
-            <button 
-              onClick={toggleMenu} 
-              className={`${vt323.className} text-white md:hidden ml-auto relative h-6 w-16 overflow-hidden text-right`}
-            >
-              <span className={`inline-block w-full transition-transform duration-300 ${menuOpen ? 'transform -translate-y-full opacity-0' : ''}`}>
-                MENU
-              </span>
-              <span className={`absolute inset-0 w-full transition-transform duration-300 ${menuOpen ? 'transform translate-y-0' : 'transform translate-y-full opacity-0'}`}>
-                CLOSE
-              </span>
-            </button>
-          </div>
-
-          {/* Mobile menu - always in DOM but height/opacity animated */}
-          <div 
-            className={`w-full flex-grow overflow-hidden transition-all duration-300 ease-in-out md:hidden ${menuContentClasses}`}
-          >
-            <ul className="flex flex-col pt-2">
-              {navLinks.map((link, index) => {
-                const active = isActive(link.href);
-                return (
-                  <li 
-                    key={index} 
-                    className={`transform transition-all duration-300 ease-in-out ${
-                      menuOpen
-                        ? 'translate-y-0 opacity-100' 
-                        : 'translate-y-4 opacity-0'
-                    }`}
-                    style={{ 
-                      transitionDelay: menuOpen ? `${(index * 75) + 100}ms` : '0ms'
-                    }}
-                  >
-                    <Link 
-                      href={link.href} 
-                      className={`${vt323.className} block py-3 px-2 text-2xl ${active ? 'text-red-500' : 'text-white'} hover:bg-white/10 transition-colors`}
-                      onClick={() => {
-                        // Close menu on navigation
-                        setMenuOpen(false);
-                      }}
-                    >
-                      {link.label}
-                      {link.about && (
-                        <span className={`${vt323.className} block mt-1 text-lg text-gray-400 font-light leading-none`}>
-                          {link.about}
-                        </span>
-                      )}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            
-            {/* Social media links row (optional) */}
-            {/* <div className={`flex px-2 space-x-8 mt-4 transition-all duration-300 ease-in-out ${
-              menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`} style={{ transitionDelay: menuOpen ? '500ms' : '0ms' }}>
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.href}
-                  className={`${vt323.className} text-white text-xl hover:text-white/80 transition-colors duration-300`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                    // Prevent immediate closing of menu
-                    e.stopPropagation();
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div> */}
-          </div>
+    <header style={headerStyle}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '1.05rem', fontWeight: 700 }}>CubeSource</span>
+          <small style={{ color: '#666' }}>Platform</small>
         </div>
       </div>
-    </div>
+
+      <nav style={navStyle} aria-label="Main navigation">
+        {navItems.map((item) => {
+          const active = isActive(item.href);
+          const combinedStyle: React.CSSProperties = {
+            ...linkStyle,
+            ...(active ? activeStyle : {}),
+          };
+
+          const isExternal = !item.href.startsWith('/');
+
+          if (isExternal) {
+            // Use a normal anchor for external links
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                style={combinedStyle}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                {item.title}
+              </a>
+            );
+          }
+
+          return (
+            <Link key={item.href} href={item.href} legacyBehavior>
+              <a style={combinedStyle}>{item.title}</a>
+            </Link>
+          );
+        })}
+      </nav>
+    </header>
   );
 }

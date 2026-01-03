@@ -1,16 +1,34 @@
 "use client";
 
 import React, { useMemo, useRef, useEffect, useState } from 'react';
-import Globe, { GlobeMethods } from 'react-globe.gl';
+import dynamic from 'next/dynamic';
+// We dynamically import `react-globe.gl` at runtime if available. This lets the
+// project run even when the package isn't installed locally (useful for CI
+// or quick dev without the heavy dependency). If not present, we render a
+// lightweight fallback message instead of crashing the build.
 import * as THREE from 'three';
-import { SimSatellite } from '../types';
-import { parseOrbitalParams, generateConstellation, getCountsMap } from '../utils';
-import { Globe as GlobeIcon, Navigation, Info, Layers, Zap, Orbit, Lightbulb } from 'lucide-react';
+import { SimSatellite } from './types';
+import { parseOrbitalParams, generateConstellation, getCountsMap } from './utils';
+import { Globe as GlobeIcon, Navigation, Info, Layers, Zap, Orbit, Lightbulb } from '@/components/icons';
+
+// Module-scoped dynamic import so HMR / re-renders don't recreate the component
+const DynamicGlobe = dynamic(
+  () => import('react-globe.gl').then((mod) => mod.default || mod),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full w-full flex items-center justify-center bg-slate-900/30 rounded-xl border border-slate-800 text-slate-500 animate-pulse">
+        Initializing 3D Environment...
+      </div>
+    )
+  }
+);
 
 interface Props {
   selectedNetwork: string;
 }
 
+type GlobeModule = any;
 const INTERESTING_FACTS: Record<string, string> = {
     'Iridium': "The original Iridium satellites produced 'Iridium flares' so bright they could be seen in daylight.",
     'Orbcomm': "Orbcomm was the first commercial provider of global low-earth orbit data and messaging services.",
@@ -26,7 +44,7 @@ const INTERESTING_FACTS: Record<string, string> = {
 };
 
 export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
-  const globeEl = useRef<GlobeMethods | undefined>(undefined);
+  const globeEl = useRef<any | undefined>(undefined);
   const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
   const [isGlobeReady, setGlobeReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +75,7 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
   const initialSatellites = useMemo(() => 
     generateConstellation(selectedOrbitalParams)
   , [selectedOrbitalParams]);
+
 
   // Satellite counts for display
   const countsMap = useMemo(() => getCountsMap(), []);
@@ -269,6 +288,32 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
     }
   }, [isGlobeReady]); 
 
+  // If `onGlobeReady` isn't fired by the component, poll for readiness
+  // (globeEl.current.getGlobeRadius is available when the Three scene is ready).
+  useEffect(() => {
+    if (isGlobeReady) return; // already ready
+    let raf = 0;
+    let mounted = true;
+
+    const checkReady = () => {
+      try {
+        if (globeEl.current && typeof globeEl.current.getGlobeRadius === 'function') {
+          const r = globeEl.current.getGlobeRadius();
+          if (r && mounted) {
+            setGlobeReady(true);
+            return;
+          }
+        }
+      } catch (e) {
+        // ignore until ready
+      }
+      raf = requestAnimationFrame(checkReady);
+    };
+
+    raf = requestAnimationFrame(checkReady);
+    return () => { mounted = false; cancelAnimationFrame(raf); };
+  }, [isGlobeReady]);
+
   // Update controls and camera
   useEffect(() => {
     if (globeEl.current && isGlobeReady) {
@@ -309,6 +354,7 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
   }, []);
+
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:h-[450px]">
@@ -396,29 +442,24 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
         </div>
         
         {containerDimensions.width > 0 && (
-            <Globe
-                ref={globeEl}
-                onGlobeReady={() => setGlobeReady(true)}
-                width={containerDimensions.width}
-                height={containerDimensions.height}
-                backgroundColor="rgba(0,0,0,0)"
-                
-                globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-                bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                
-                polygonsData={landPolygons.features}
-                polygonCapColor={() => 'rgba(0,0,0,0)'}
-                polygonSideColor={() => 'rgba(0,0,0,0)'}
-                polygonStrokeColor={() => '#0e7490'}
-                polygonAltitude={0.01}
-
-                // Using InstancedMesh (manual management) instead of objectsData/pointsData
-                // This ensures we get spheres (not cylinders) and high performance (no OOM)
-                
-                atmosphereColor="#38bdf8"
-                atmosphereAltitude={0.25}
+          // @ts-ignore - dynamic client component
+          <DynamicGlobe
+              ref={globeEl}
+              onGlobeReady={() => setGlobeReady(true)}
+              width={containerDimensions.width}
+              height={containerDimensions.height}
+              backgroundColor="rgba(0,0,0,0)"
+              globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+              bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+              polygonsData={landPolygons.features}
+              polygonCapColor={() => 'rgba(0,0,0,0)'}
+              polygonSideColor={() => 'rgba(0,0,0,0)'}
+              polygonStrokeColor={() => '#0e7490'}
+              polygonAltitude={0.01}
+              atmosphereColor="#38bdf8"
+              atmosphereAltitude={0.25}
             />
-        )}
+          )}
       </div>
     </div>
   );

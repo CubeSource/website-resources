@@ -2,8 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
-import { RAW_CSV_DATA } from '../constants';
-import { parseCSV } from '../utils';
+import { RAW_CSV_DATA } from './constants';
+import { parseCSV } from './utils';
 import { SatelliteTable } from './SatelliteTable';
 
 // Dynamic import is CRITICAL for Next.js integration.
@@ -24,26 +24,19 @@ export const SatelliteExplorer: React.FC = () => {
   
   return (
     <div className="w-full space-y-8 text-slate-200">
-        <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-white tracking-tight">Non Terrestrial Network Overview</h1>
-            <p className="text-lg text-slate-400 max-w-3xl leading-relaxed">
-                Comprehensive registry of commercial satellite communication networks, comparing frequency bands, power requirements, and operational costs.
-            </p>
-        </div>
-
-        {/* Top Section: Visualization */}
-        <section className="relative w-full">
-             <GlobeView selectedNetwork={selectedNetwork} />
-        </section>
+      {/* Top Section: Visualization */}
+      <section className="relative w-full">
+         <GlobeView selectedNetwork={selectedNetwork} />
+      </section>
 
         {/* Bottom Section: Data Table */}
-        <section className="w-full">
-             <SatelliteTable 
-                data={data} 
-                selectedNetwork={selectedNetwork}
-                onSelectNetwork={setSelectedNetwork}
-             />
-        </section>
+        <section className="w-full mt-28">
+         <SatelliteTable 
+          data={data} 
+          selectedNetwork={selectedNetwork}
+          onSelectNetwork={setSelectedNetwork}
+         />
+      </section>
     </div>
   );
 };

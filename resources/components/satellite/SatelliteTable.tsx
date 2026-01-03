@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { SatelliteNetwork } from '../types';
-import { ArrowUpDown, Zap, Wifi, DollarSign, Signal, Globe, Activity, X } from 'lucide-react';
+import { SatelliteNetwork } from './types';
+import { ArrowUpDown, Zap, Wifi, DollarSign, Signal, Globe, Activity, X } from '@/components/icons';
 
 interface Props {
   data: SatelliteNetwork[];

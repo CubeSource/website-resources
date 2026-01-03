@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 type NavItem = {
   title: string;
@@ -11,6 +13,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   { title: 'Home', href: '/' },
   { title: 'Docs', href: '/docs' },
+  { title: 'NTN Visualiser', href: '/satellite' },
   // example external link; keep external: true for clarity but treat same-origin externals as active
   { title: 'Resource Center', href: 'https://resources.cubesource.com/', external: true },
 ];
@@ -45,7 +48,7 @@ const activeStyle: React.CSSProperties = {
 };
 
 export default function Nav() {
-  const router = useRouter();
+  const pathname = usePathname();
 
   // Helper to determine if a link should be marked active.
   // Treat external links that match the current origin as active.
@@ -53,7 +56,7 @@ export default function Nav() {
     // If href is a relative path, compare to router.asPath
     if (href.startsWith('/')) {
       // Consider path-only match and also when router.asPath starts with the href (for sections)
-      return router.asPath === href || router.asPath.startsWith(href + '/') || (href === '/' && router.asPath === '/');
+      return pathname === href || pathname.startsWith(href + '/') || (href === '/' && pathname === '/');
     }
 
     // For absolute URLs, try to parse and compare origin + pathname to current location
@@ -66,12 +69,12 @@ export default function Nav() {
           // Compare pathname + search to router.asPath where possible
           const hrefPath = url.pathname + (url.search || '');
           // Exact match or router.asPath starts with the hrefPath
-          return router.asPath === hrefPath || router.asPath.startsWith(hrefPath + '/') || (hrefPath === '/' && router.asPath === '/');
+          return pathname === hrefPath || pathname.startsWith(hrefPath + '/') || (hrefPath === '/' && pathname === '/');
         }
       }
     } catch (e) {
       // If parsing fails, fall back to string comparison
-      if (router.asPath === href) return true;
+      if (pathname === href) return true;
     }
 
     return false;

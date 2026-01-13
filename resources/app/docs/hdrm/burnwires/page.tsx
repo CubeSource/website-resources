@@ -31,6 +31,8 @@ export default function BurnwiresPage() {
       <ProductLink 
         storeUrl="https://www.cubesource.space/product-page/burnwire-release-mechanism" 
         productText="Burnwires are"
+        imageSrc="Burnwing.png"
+        imageAlt="Burnwire mechanism"
       />
 
       <div className="pt-6">

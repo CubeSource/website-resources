@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import NextImage from "next/image";
 import { vt323 } from "../../lib/fonts";
 
 /**
@@ -14,6 +15,8 @@ import { vt323 } from "../../lib/fonts";
  *                      Defaults to "This product is".
  *                      Examples: "This burnwire is", "These components are", "This frame is"
  *                      Text format: "{productText} available on the CubeSource store."
+ * @param imageSrc - Optional image source path relative to public/images/ directory (e.g., "product.jpg" for public/images/product.jpg)
+ * @param imageAlt - Alt text for the image (required if imageSrc is provided)
  * 
  * @example
  * // Basic usage with default text
@@ -39,11 +42,24 @@ import { vt323 } from "../../lib/fonts";
 interface ProductLinkProps {
   storeUrl: string;
   productText?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-export default function ProductLink({ storeUrl, productText = "This product is" }: ProductLinkProps) {
+export default function ProductLink({ storeUrl, productText = "This product is", imageSrc, imageAlt }: ProductLinkProps) {
   return (
     <div className="w-full my-6 p-6 bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px]">
+      {imageSrc && (
+        <div className="w-full mb-4 aspect-video bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px] overflow-hidden relative">
+          <NextImage
+            src={`/images/${imageSrc}`}
+            alt={imageAlt || "Product image"}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
+          />
+        </div>
+      )}
       <p className="text-base text-zinc-300 sm:text-lg leading-relaxed mb-4">
         {productText} available on the CubeSource store.
       </p>

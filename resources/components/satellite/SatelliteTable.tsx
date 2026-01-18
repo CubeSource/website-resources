@@ -13,14 +13,14 @@ interface Props {
 const BAND_LEGEND = [
     { label: 'VHF', range: '30 - 300 MHz', color: 'bg-fuchsia-900/30 text-fuchsia-300 ring-1 ring-inset ring-fuchsia-700/50' },
     { label: 'UHF', range: '300 MHz - 1 GHz', color: 'bg-indigo-900/30 text-indigo-300 ring-1 ring-inset ring-indigo-700/50' },
-    { label: 'L-Band', range: '1 - 2 GHz', color: 'bg-blue-900/30 text-blue-300 ring-1 ring-inset ring-blue-700/50' },
-    { label: 'S-Band', range: '2 - 4 GHz', color: 'bg-sky-900/30 text-sky-300 ring-1 ring-inset ring-sky-700/50' },
+    { label: 'L-Band', range: '1 - 2 GHz', color: 'bg-slate-800/50 text-slate-300 ring-1 ring-inset ring-slate-700' },
+    { label: 'S-Band', range: '2 - 4 GHz', color: 'bg-zinc-800/50 text-zinc-300 ring-1 ring-inset ring-zinc-700' },
     { label: 'Ku-Band', range: '12 - 18 GHz', color: 'bg-emerald-500/15 text-emerald-200 ring-1 ring-inset ring-emerald-500/30' },
 ];
 
 const getBandStyle = (raw: string) => {
     if (raw.includes('Ku-Band')) return BAND_LEGEND[4].color;
-    if (raw.includes('L/S-Band')) return 'bg-gradient-to-r from-blue-900/30 to-sky-900/30 text-sky-100 ring-1 ring-inset ring-blue-700/50';
+    if (raw.includes('L/S-Band')) return 'bg-gradient-to-r from-slate-800/50 to-zinc-800/50 text-slate-100 ring-1 ring-inset ring-slate-700';
     if (raw.includes('L-Band')) return BAND_LEGEND[2].color;
     if (raw.includes('S-Band')) return BAND_LEGEND[3].color;
     if (raw.includes('VHF')) return BAND_LEGEND[0].color;
@@ -183,10 +183,10 @@ export const SatelliteTable: React.FC<Props> = ({ data, selectedNetwork, onSelec
         </div>
       )}
 
-      <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 shadow-xl">
+      <div className="overflow-hidden rounded-xl border border-zinc-800 bg-black/60 shadow-xl">
         <div className="overflow-x-auto">
           <table className="min-w-full text-center text-sm whitespace-nowrap">
-            <thead className="bg-slate-900/80 text-xs uppercase tracking-wider text-slate-400 backdrop-blur-sm">
+            <thead className="bg-black/80 text-xs uppercase tracking-wider text-slate-400 backdrop-blur-sm">
               <tr>
                 {[
                   { key: 'network', label: 'Network', icon: <Signal size={12} className="mr-1" /> },
@@ -200,7 +200,7 @@ export const SatelliteTable: React.FC<Props> = ({ data, selectedNetwork, onSelec
                   <th
                     key={col.key}
                     scope="col"
-                    className="cursor-pointer px-6 py-3 font-semibold hover:bg-slate-800 hover:text-cyan-400 transition-colors"
+                    className="cursor-pointer px-6 py-3 font-semibold hover:bg-slate-800 hover:text-black transition-colors"
                     onClick={() => handleSort(col.key)}
                   >
                     <div className="flex items-center justify-center">
@@ -225,13 +225,13 @@ export const SatelliteTable: React.FC<Props> = ({ data, selectedNetwork, onSelec
                         onClick={() => onSelectNetwork(row.network)}
                         className={`group cursor-pointer transition-all duration-200 border-l-4 
                           ${isSelected 
-                            ? 'bg-blue-900/30 border-cyan-400 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)]' 
+                            ? 'bg-slate-900/50 border-black shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)]' 
                             : 'border-transparent hover:bg-slate-800/50 hover:border-slate-700'
                           }`}
                     >
                         <td className="px-6 py-2 font-medium text-slate-200">
                            <div className="flex justify-center">
-                               <span className={`inline-flex w-24 items-center justify-center rounded-md py-1 text-sm font-medium transition-all ${bandStyle} ${isSelected ? 'ring-2 ring-cyan-500/50 scale-105' : ''}`}>
+                               <span className={`inline-flex w-24 items-center justify-center rounded-md py-1 text-sm font-medium transition-all ${bandStyle} ${isSelected ? 'ring-2 ring-black scale-105' : ''}`}>
                                     {row.network}
                                 </span>
                            </div>
@@ -248,8 +248,8 @@ export const SatelliteTable: React.FC<Props> = ({ data, selectedNetwork, onSelec
                          <td className="px-6 py-2 text-slate-300 font-mono">
                             {formatDisplayPower(rx)}
                         </td>
-                        <td className="px-6 py-2 font-medium text-cyan-300">{row.hardwareCost}</td>
-                        <td className="px-6 py-2 font-medium text-emerald-300">{row.serviceCost}</td>
+                        <td className="px-6 py-2 font-medium text-slate-300">{row.hardwareCost}</td>
+                        <td className="px-6 py-2 font-medium text-slate-300">{row.serviceCost}</td>
                     </tr>
                   );
                 })
@@ -261,7 +261,7 @@ export const SatelliteTable: React.FC<Props> = ({ data, selectedNetwork, onSelec
                         <p>No networks found matching the selected filters.</p>
                         <button 
                             onClick={clearFilters}
-                            className="text-cyan-400 hover:underline text-xs mt-1"
+                            className="text-slate-400 hover:underline text-xs mt-1"
                         >
                             Clear filters
                         </button>

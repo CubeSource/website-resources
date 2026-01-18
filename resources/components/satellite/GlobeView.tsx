@@ -270,8 +270,8 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
         if (typeof globeInstance.globeMaterial === 'function') {
             const globeMaterial = globeInstance.globeMaterial() as THREE.MeshPhongMaterial;
             if (globeMaterial) {
-                globeMaterial.color = new THREE.Color('#1e3a8a'); // Darker blue base
-                globeMaterial.emissive = new THREE.Color('#0ea5e9');
+                globeMaterial.color = new THREE.Color('#0a0a0a'); // True black/very dark
+                globeMaterial.emissive = new THREE.Color('#18181b');
                 globeMaterial.emissiveIntensity = 0.1;
                 globeMaterial.shininess = 0.5;
             }
@@ -360,9 +360,9 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:h-[450px]">
       {/* Left Sidebar - Stats */}
       <div className="space-y-6 lg:col-span-1 flex flex-col h-full">
-        <div className="flex-1 flex flex-col gap-4 rounded-xl border border-slate-800 bg-slate-900/50 p-5 shadow-sm overflow-y-auto custom-scrollbar">
-             <div className="flex items-center gap-3 border-b border-slate-800 pb-4 shrink-0">
-                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800 text-cyan-400">
+        <div className="flex-1 flex flex-col gap-4 rounded-xl border border-zinc-800 bg-black/60 p-5 shadow-sm overflow-y-auto custom-scrollbar">
+             <div className="flex items-center gap-3 border-b border-zinc-800 pb-4 shrink-0">
+                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900 text-white">
                     <GlobeIcon size={20} />
                  </div>
                  <div>
@@ -379,15 +379,15 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
              </div>
              
              <div className="grid grid-cols-2 gap-4 shrink-0">
-                 <div className="p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                 <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800">
                      <div className="text-xs text-slate-500 mb-1 flex items-center gap-1"><Navigation size={10}/> Altitude</div>
                      <div className="text-lg font-semibold text-slate-200">{selectedOrbitalParams.altitudeKm.toLocaleString()} km</div>
                  </div>
-                 <div className="p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                 <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800">
                      <div className="text-xs text-slate-500 mb-1 flex items-center gap-1"><Layers size={10}/> Inclination</div>
                      <div className="text-lg font-semibold text-slate-200">{selectedOrbitalParams.inclinationDeg}°</div>
                  </div>
-                 <div className="p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                 <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800">
                      <div className="text-xs text-slate-500 mb-1 flex items-center gap-1"><Zap size={10}/> Period</div>
                      <div className="text-lg font-semibold text-slate-200">
                         {selectedOrbitalParams.periodMin > 200 
@@ -395,7 +395,7 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
                             : `${Math.round(selectedOrbitalParams.periodMin)} min`}
                      </div>
                  </div>
-                 <div className="p-3 rounded-lg bg-slate-800/30 border border-slate-700/30">
+                 <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800">
                      <div className="text-xs text-slate-500 mb-1 flex items-center gap-1"><Orbit size={10}/> Orbit</div>
                      <div className="text-lg font-semibold text-slate-200">
                          {orbitType}
@@ -403,13 +403,13 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
                  </div>
              </div>
 
-             <div className="p-3 rounded-lg bg-cyan-900/10 border border-cyan-800/30 h-24 shrink-0 overflow-y-auto custom-scrollbar">
+             <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 h-24 shrink-0 overflow-y-auto custom-scrollbar">
                  <div className="flex items-center gap-1 mb-1">
-                    <h4 className="text-sm font-semibold text-cyan-400 flex items-center gap-1">
+                    <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1">
                         <Info size={14}/> Coverage Strategy{strategyType ? ':' : ''}
                     </h4>
                     {strategyType && (
-                        <span className="text-sm font-semibold text-cyan-200">
+                        <span className="text-sm font-semibold text-slate-200">
                             {strategyType}
                         </span>
                     )}
@@ -419,8 +419,8 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
                  </p>
              </div>
 
-             <div className="p-3 rounded-lg bg-cyan-900/10 border border-cyan-800/30 h-32 flex flex-col shrink-0 overflow-y-auto custom-scrollbar">
-                 <h4 className="text-sm font-semibold text-cyan-400 mb-1 flex items-center gap-1 shrink-0">
+             <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 h-32 flex flex-col shrink-0 overflow-y-auto custom-scrollbar">
+                 <h4 className="text-sm font-semibold text-slate-300 mb-1 flex items-center gap-1 shrink-0">
                      <Lightbulb size={14}/> Did you know?
                  </h4>
                  <div className="pr-1">
@@ -433,9 +433,9 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
       </div>
 
       {/* Right - Globe */}
-      <div className="h-[300px] lg:h-full lg:col-span-2 rounded-xl border border-slate-800 bg-slate-900/30 overflow-hidden relative shadow-2xl" ref={containerRef}>
-        <div className="absolute top-4 left-4 z-10 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-700/50 pointer-events-none">
-            <h3 className="text-xs font-semibold text-cyan-400 flex items-center gap-2">
+      <div className="h-[300px] lg:h-full lg:col-span-2 rounded-xl border border-zinc-800 bg-black/60 overflow-hidden relative shadow-2xl" ref={containerRef}>
+        <div className="absolute top-4 left-4 z-10 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-zinc-700/50 pointer-events-none">
+            <h3 className="text-xs font-semibold text-slate-300 flex items-center gap-2">
                 <GlobeIcon size={14} />
                 {selectedOrbitalParams.network} Constellation
             </h3>
@@ -454,9 +454,9 @@ export const GlobeView: React.FC<Props> = ({ selectedNetwork }) => {
               polygonsData={landPolygons.features}
               polygonCapColor={() => 'rgba(0,0,0,0)'}
               polygonSideColor={() => 'rgba(0,0,0,0)'}
-              polygonStrokeColor={() => '#0e7490'}
+              polygonStrokeColor={() => '#3f3f46'}
               polygonAltitude={0.01}
-              atmosphereColor="#38bdf8"
+              atmosphereColor="#27272a"
               atmosphereAltitude={0.25}
             />
           )}

@@ -49,7 +49,7 @@ export default function ResourcesPage() {
                     >
                       <div className="flex items-center gap-3">
                         <span
-                          className={`${vt323.className} inline-block text-3xl text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-5xl${
+                          className={`${vt323.className} inline-block text-lg text-zinc-100 transition-colors duration-300 ease-out group-hover:text-zinc-200 sm:text-2xl${
                             openUrl === item.url ? " text-zinc-200" : ""
                           }`}
                         >

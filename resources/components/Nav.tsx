@@ -26,7 +26,7 @@ export default function NavBar() {
   // Navigation links data - simplified to just Documentation and Calculators
   const navLinks: NavLink[] = [
     {
-      href: "https://learn.cubesource.space/",
+      href: "/",
       label: "Resource Center",
       about: "Browse comprehensive guides and documentation."
     },

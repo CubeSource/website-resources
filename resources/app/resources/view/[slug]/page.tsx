@@ -88,9 +88,18 @@ export default function PdfViewerPage() {
             >
               ← Back to resources
             </Link>
-            <h1 className={`${vt323.className} text-2xl sm:text-3xl text-white`}>
-              {filename.replace('.pdf', '').replace(/_/g, ' ')}
-            </h1>
+            <div className="flex items-center justify-between gap-4">
+              <h1 className={`${vt323.className} text-2xl sm:text-3xl text-white`}>
+                {filename.replace('.pdf', '').replace(/_/g, ' ')}
+              </h1>
+              <a
+                href={pdfSrc}
+                download={filename}
+                className={`${vt323.className} text-lg px-4 py-2 bg-zinc-800/50 border border-white/20 rounded hover:bg-zinc-700/50 hover:border-white/30 text-zinc-300 hover:text-white transition-colors whitespace-nowrap`}
+              >
+                Download
+              </a>
+            </div>
           </div>
         </div>
 

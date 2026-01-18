@@ -80,7 +80,7 @@ export default function PdfViewerPage() {
       <StarryBackground />
       <div className="relative z-10 min-h-dvh pt-16">
         {/* Header with back button and title */}
-        <div className="relative bg-black/50 backdrop-blur-sm border-b border-white/10 px-6 py-6">
+        <div className="relative px-6 py-6">
           <div className="max-w-6xl mx-auto">
             <Link
               href="/resources"
@@ -95,9 +95,33 @@ export default function PdfViewerPage() {
               <a
                 href={pdfSrc}
                 download={filename}
-                className={`${vt323.className} text-lg px-4 py-2 bg-zinc-800/50 border border-white/20 rounded hover:bg-zinc-700/50 hover:border-white/30 text-zinc-300 hover:text-white transition-colors whitespace-nowrap`}
+                className={`${vt323.className} cursor-pointer group/button relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden whitespace-nowrap`}
               >
-                Download
+                <span 
+                  data-overlay
+                  className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
+                />
+                <span 
+                  className="relative z-10 inline-block"
+                  onMouseEnter={(e) => {
+                    const button = e.currentTarget.closest('a');
+                    const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                    if (overlay) {
+                      overlay.classList.remove('scale-x-0');
+                      overlay.classList.add('scale-x-100');
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    const button = e.currentTarget.closest('a');
+                    const overlay = button?.querySelector('[data-overlay]') as HTMLElement;
+                    if (overlay) {
+                      overlay.classList.remove('scale-x-100');
+                      overlay.classList.add('scale-x-0');
+                    }
+                  }}
+                >
+                  Download
+                </span>
               </a>
             </div>
           </div>

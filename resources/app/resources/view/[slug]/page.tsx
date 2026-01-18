@@ -78,7 +78,7 @@ export default function PdfViewerPage() {
     <div className="relative min-h-dvh bg-black text-zinc-200">
       <NavBar />
       <StarryBackground />
-      <div className="relative z-10 min-h-dvh pt-16">
+      <div className="relative z-10 min-h-dvh pt-20 sm:pt-24 md:pt-20">
         {/* Header with back button and title */}
         <div className="relative px-6 py-6">
           <div className="max-w-6xl mx-auto">

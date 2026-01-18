@@ -79,29 +79,32 @@ export default function PdfViewerPage() {
       <NavBar />
       <StarryBackground />
       <div className="relative z-10 min-h-dvh pt-16">
-        {/* Header with back button - positioned below NavBar */}
-        <div className="fixed top-16 left-0 right-0 z-20 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Header with back button and title */}
+        <div className="relative bg-black/50 backdrop-blur-sm border-b border-white/10 px-6 py-6">
+          <div className="max-w-6xl mx-auto">
             <Link
               href="/resources"
-              className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
+              className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors inline-block mb-3`}
             >
               ← Back to resources
             </Link>
-            <h1 className={`${vt323.className} text-xl text-white hidden sm:block`}>
+            <h1 className={`${vt323.className} text-2xl sm:text-3xl text-white`}>
               {filename.replace('.pdf', '').replace(/_/g, ' ')}
             </h1>
-            <div className="w-24"></div> {/* Spacer for centering */}
           </div>
         </div>
 
-        {/* PDF Viewer */}
-        <div className="w-full pt-16" style={{ height: 'calc(100dvh - 64px)' }}>
-          <iframe
-            src={pdfSrc}
-            className="w-full h-full border-0"
-            title={filename}
-          />
+        {/* PDF Viewer Container */}
+        <div className="py-8 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-zinc-900/50 border border-white/10 rounded-lg overflow-hidden shadow-2xl" style={{ height: '85vh' }}>
+              <iframe
+                src={pdfSrc}
+                className="w-full h-full border-0"
+                title={filename}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

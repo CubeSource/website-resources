@@ -6,9 +6,9 @@ const Footer: React.FC = () => {
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
 
-          {/* Column 1: Brand, Socials, Copyright (Span 3) */}
-          {/* UPDATED: Added responsive alignment (Center mobile -> Left desktop) */}
-          <div className="lg:col-span-3 flex flex-col justify-between h-full min-h-[200px] space-y-8 items-center text-center lg:items-start lg:text-left">
+          {/* Column 1: Brand, Socials, Copyright (Span 2) */}
+          {/* UPDATED: Reduced to span 2 to pull Links column left */}
+          <div className="lg:col-span-2 flex flex-col justify-between h-full min-h-[200px] space-y-8 items-center text-center lg:items-start lg:text-left">
 
             {/* Logo - UPDATED: Added justify-center for mobile */}
             <div className="flex items-center gap-3 justify-center lg:justify-start">
@@ -63,8 +63,8 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Links (Span 2) - Centered content */}
-          <div className="lg:col-span-2 flex justify-center lg:justify-center">
+          {/* Column 2: Links (Span 4) - Centered content */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-center">
             <nav className="flex flex-col space-y-4 text-center items-center pt-2">
               <a href="/products" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Products</a>
               <a href="/resources" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Resource Center</a>
@@ -75,8 +75,8 @@ const Footer: React.FC = () => {
             </nav>
           </div>
 
-          {/* Column 3: Subscribe (Span 4) */}
-          <div className="lg:col-span-4 flex flex-col items-center pt-2">
+          {/* Column 3: Subscribe (Span 3) */}
+          <div className="lg:col-span-3 flex flex-col items-center pt-2">
             <h3 className="text-xl text-[#a0a0a0] font-normal mb-8 text-center w-full">Subscribe for exclusive updates</h3>
             <form action="https://www.cubesource.space/_functions/submitForm" method="POST" className="w-full flex flex-col items-center">
 

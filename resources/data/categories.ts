@@ -93,13 +93,9 @@ export const categories: Category[] = [
   },
   {
     name: "Assembly",
+    image: "/images/graphic-assembly.png",
     items: [
-      {
-        title: "Fastener Torque Calculations",
-        description:
-          "Calculate torque specs and preload requirements to ensure structural integrity.",
-        route: "/calculators/fastener-torque",
-      },
+
       {
         title: "Epoxies / Adhesives",
         description:
@@ -122,6 +118,7 @@ export const categories: Category[] = [
   },
   {
     name: "Environmental Testing",
+    image: "/images/graphic-enviroment.png",
     items: [
       {
         title: "Vibration Testing",

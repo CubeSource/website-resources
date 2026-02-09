@@ -142,13 +142,7 @@ export default function Home() {
                     </div>
                   </div>
                   {category.image && (
-                    <div
-                      className="hidden md:block relative shrink-0 mt-0"
-                      style={{
-                        width: category.imageSize || 180,
-                        height: category.imageSize || 180,
-                      }}
-                    >
+                    <div className="hidden md:flex relative shrink-0 mt-0 w-[180px] h-[180px] items-center justify-center">
                       <Image
                         src={category.image}
                         alt={category.name}

@@ -142,13 +142,23 @@ export default function Home() {
                     </div>
                   </div>
                   {category.image && (
-                    <div className="hidden md:block relative shrink-0 w-[180px] h-[180px] mt-0">
+                    <div
+                      className="hidden md:block relative shrink-0 mt-0"
+                      style={{
+                        width: category.imageSize || 180,
+                        height: category.imageSize || 180,
+                      }}
+                    >
                       <Image
                         src={category.image}
                         alt={category.name}
-                        width={180}
-                        height={180}
-                        className="object-contain w-[180px] h-[180px]"
+                        width={category.imageSize || 180}
+                        height={category.imageSize || 180}
+                        className="object-contain"
+                        style={{
+                          width: category.imageSize || 180,
+                          height: category.imageSize || 180,
+                        }}
                       />
                     </div>
                   )}

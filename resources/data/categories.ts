@@ -8,6 +8,7 @@ export type Category = {
   name: string;
   items: CategoryItem[];
   image?: string;
+  imageSize?: number;
 };
 
 export const categories: Category[] = [
@@ -68,6 +69,7 @@ export const categories: Category[] = [
   {
     name: "Electrical Power Systems (EPS)",
     image: "/images/graphic-eps.png",
+    imageSize: 120,
     items: [
       {
         title: "Batteries",

@@ -30,18 +30,11 @@ export default function VibrationTestingPage() {
       <section className="space-y-4">
         <Section>Test Planning</Section>
         <Text>
-          This section helps you plan sine, random, and shock tests, including fixture design and acceptance criteria.
+          Planning includes defining sine, random, and shock test profiles, designing fixtures, and establishing acceptance criteria.
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link
-          href="/"
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

@@ -30,18 +30,11 @@ export default function EpoxiesAdhesivesPage() {
       <section className="space-y-4">
         <Section>Selection Criteria</Section>
         <Text>
-          Crucially, these materials are selected for low-outgassing properties to prevent optics contamination in a vacuum. This guide details proper selection, surface preparation, and cure cycles.
+          Crucially, these materials are selected for low-outgassing properties to prevent optics contamination in a vacuum. Proper selection, surface preparation, and cure cycles are critical for success.
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link
-          href="/"
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

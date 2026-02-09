@@ -66,19 +66,19 @@ const Footer: React.FC = () => {
           {/* Column 2: Links (Span 4) - Centered content */}
           <div className="lg:col-span-4 flex justify-center lg:justify-center">
             <nav className="flex flex-col space-y-4 text-center items-center pt-2">
-              <a href="/products" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Products</a>
-              <a href="/resources" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Resource Center</a>
-              <a href="/feed" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Feed</a>
-              <a href="/about-4-1" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Careers</a>
-              <a href="/about-4" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">About</a>
-              <a href="/contact-8" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Contact</a>
+              <a href="https://www.cubesource.space/products" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Products</a>
+              <a href="https://www.cubesource.space/resources" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Resource Center</a>
+              <a href="https://www.cubesource.space/feed" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Feed</a>
+              <a href="https://www.cubesource.space/about-4-1" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Careers</a>
+              <a href="https://www.cubesource.space/about-4" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">About</a>
+              <a href="https://www.cubesource.space/contact-8" className="text-white hover:text-blue-400 text-lg underline decoration-[#7a7a7a] underline-offset-4 decoration-1">Contact</a>
             </nav>
           </div>
 
           {/* Column 3: Subscribe (Span 3) */}
           <div className="lg:col-span-3 flex flex-col items-center pt-2">
             <h3 className="text-xl text-[#a0a0a0] font-normal mb-8 text-center w-full">Subscribe for exclusive updates</h3>
-            <form action="https://www.cubesource.space/_functions/submitForm" method="POST" className="w-full flex flex-col items-center">
+            <form action="https://www.cubesource.space/contact-8" method="GET" target="_blank" className="w-full flex flex-col items-center">
 
               <div className="w-full max-w-[300px] flex flex-col gap-4">
                 <div className="flex flex-col gap-1 w-full">

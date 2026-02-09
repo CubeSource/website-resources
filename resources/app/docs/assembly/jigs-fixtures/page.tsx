@@ -30,18 +30,11 @@ export default function JigsFixturesPage() {
       <section className="space-y-4">
         <Section>Validation</Section>
         <Text>
-          Discover how to design and validate these aids to support consistent manufacturing tolerances.
+          These aids are designed and validated to support consistent manufacturing tolerances.
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link
-          href="/"
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

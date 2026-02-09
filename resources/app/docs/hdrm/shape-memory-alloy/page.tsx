@@ -15,7 +15,7 @@ export default function ShapeMemoryAlloyPage() {
           Shape Memory Alloy
         </Title>
       </div>
-      
+
       <section className="space-y-4">
         <Section>Shape Memory Alloy</Section>
         <Text>
@@ -23,14 +23,7 @@ export default function ShapeMemoryAlloyPage() {
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link 
-          href="/" 
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

@@ -19,7 +19,7 @@ export default function BatteriesPage() {
           Reliable energy storage is non-negotiable for survival during eclipse phases and high-power operations.
         </Header>
       </div>
-      
+
       <section className="space-y-4">
         <Section>Energy Reservoir</Section>
         <Text>
@@ -34,14 +34,7 @@ export default function BatteriesPage() {
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link 
-          href="/" 
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

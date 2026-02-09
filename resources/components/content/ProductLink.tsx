@@ -44,13 +44,14 @@ interface ProductLinkProps {
   productText?: string;
   imageSrc?: string;
   imageAlt?: string;
+  imageClassName?: string;
 }
 
-export default function ProductLink({ storeUrl, productText = "This product is", imageSrc, imageAlt }: ProductLinkProps) {
+export default function ProductLink({ storeUrl, productText = "This product is", imageSrc, imageAlt, imageClassName = "w-full" }: ProductLinkProps) {
   return (
     <div className="w-full my-6 p-6 bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px]">
       {imageSrc && (
-        <div className="w-full mb-4 aspect-video bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px] overflow-hidden relative">
+        <div className={`${imageClassName} mb-4 aspect-video bg-[#040404] bg-opacity-80 backdrop-blur-md border border-white/10 rounded-[0px] overflow-hidden relative`}>
           <NextImage
             src={`/images/${imageSrc}`}
             alt={imageAlt || "Product image"}
@@ -69,11 +70,11 @@ export default function ProductLink({ storeUrl, productText = "This product is",
         rel="noopener noreferrer"
         className={`${vt323.className} cursor-pointer group/button relative inline-flex items-center rounded-none border border-white/10 bg-[linear-gradient(90deg,#ffffff_0%,#ffffff_50%,#e4e4e7_100%)] bg-[length:200%_100%] bg-[position:0%_50%] px-4 py-1 text-lg text-black shadow-sm transition-[background-position,box-shadow] duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-[position:100%_50%] hover:shadow-md overflow-hidden`}
       >
-        <span 
+        <span
           data-overlay
           className="absolute inset-0 bg-gray-300 transform scale-x-0 transition-transform duration-300 origin-right pointer-events-none"
         />
-        <span 
+        <span
           className="relative z-10 inline-block"
           onMouseEnter={(e) => {
             const button = e.currentTarget.closest('a');

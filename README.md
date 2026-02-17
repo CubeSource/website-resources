@@ -1,5 +1,5 @@
 # website-resources
-Repo for custom javascript resource page
+Repo for custom javascript resource page on cubesats
 
 [learn.cubesource.space](https://learn.cubesource.space/)
 

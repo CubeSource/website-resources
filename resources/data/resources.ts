@@ -49,6 +49,13 @@ export const resourceCategories: ResourceCategory[] = [
         url: "/resources/view/atomic-oxygen-interactions",
         pdfFilename: "Atomic oxygen interactions .pdf",
       },
+      {
+        title: "Radiation for Electronics",
+        description:
+          "Radiation effects topics for orbit and various terrestrial applications.",
+        url: "/resources/view/radiation-for-electronics",
+        pdfFilename: "Radiation_Handbook.pdf",
+      },
     ],
   },
   {

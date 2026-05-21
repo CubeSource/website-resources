@@ -10,6 +10,7 @@ export const pdfSlugMap: Record<string, string> = {
   "cds-rev14": "CDS+REV14_1+2022-02-09.pdf",
   "basics-thermal-resistance-heat-dissipation": "basics_of_thermal_resistance_and_heat_dissipation_an-e.pdf",
   "atomic-oxygen-interactions": "Atomic oxygen interactions .pdf",
+  "radiation-for-electronics" : "Radiation_Handbook.pdf",
   "soa-2023": "soa-2023.pdf",
 };
 

@@ -8,29 +8,29 @@ import Header from "../../../../components/content/Header";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 
-export default function SeparationSwitchesPage() {
+export default function VibrationTestingPage() {
   return (
     <Content>
       <div className="space-y-3">
-        <Title number="04" category="Electrical Power Systems (EPS)">
-          Separation Switches
+        <Title number="06" category="Environmental Testing">
+          Vibration Testing
         </Title>
         <Header>
-          Ensuring the system remains dormant until deployment is a strict launch requirement.
+          Before reaching orbit, hardware must survive the intense acoustic and mechanical energy of launch.
         </Header>
       </div>
 
       <section className="space-y-4">
-        <Section>Inhibit Mechanisms</Section>
+        <Section>Qualification Process</Section>
         <Text>
-          Separation switches (or kill switches) are electromechanical devices that physically interrupt the power circuit while the hardware is stowed, automatically closing the circuit to activate the bus only after ejection.
+          Vibration testing is a qualification process where the integrated system is shaken at specific frequencies and amplitudes to verify that structural integrity and electronics will withstand ascent loads.
         </Text>
       </section>
 
       <section className="space-y-4">
-        <Section>Integration & Safety</Section>
+        <Section>Test Planning</Section>
         <Text>
-          Learn how to integrate these inhibits for launch safety and reliable system startup.
+          Planning includes defining sine, random, and shock test profiles, designing fixtures, and establishing acceptance criteria.
         </Text>
       </section>
 

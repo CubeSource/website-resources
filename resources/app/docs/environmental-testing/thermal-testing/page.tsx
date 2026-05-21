@@ -8,29 +8,29 @@ import Header from "../../../../components/content/Header";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 
-export default function SeparationSwitchesPage() {
+export default function ThermalTestingPage() {
   return (
     <Content>
       <div className="space-y-3">
-        <Title number="04" category="Electrical Power Systems (EPS)">
-          Separation Switches
+        <Title number="06" category="Environmental Testing">
+          Thermal Testing
         </Title>
         <Header>
-          Ensuring the system remains dormant until deployment is a strict launch requirement.
+          Space is an environment of extreme temperature fluctuations.
         </Header>
       </div>
 
       <section className="space-y-4">
-        <Section>Inhibit Mechanisms</Section>
+        <Section>Thermal Cycling</Section>
         <Text>
-          Separation switches (or kill switches) are electromechanical devices that physically interrupt the power circuit while the hardware is stowed, automatically closing the circuit to activate the bus only after ejection.
+          Thermal testing involves cycling the hardware through hot and cold extremes—often within a vacuum chamber—to validate that the thermal control system maintains safe operating temperatures for all subsystems.
         </Text>
       </section>
 
       <section className="space-y-4">
-        <Section>Integration & Safety</Section>
+        <Section>Verification Campaigns</Section>
         <Text>
-          Learn how to integrate these inhibits for launch safety and reliable system startup.
+          Thermal balance and thermal vacuum (TVAC) campaigns are executed to verify performance in the harsh orbital environment.
         </Text>
       </section>
 

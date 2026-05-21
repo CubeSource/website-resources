@@ -8,29 +8,29 @@ import Header from "../../../../components/content/Header";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 
-export default function SeparationSwitchesPage() {
+export default function JigsFixturesPage() {
   return (
     <Content>
       <div className="space-y-3">
-        <Title number="04" category="Electrical Power Systems (EPS)">
-          Separation Switches
+        <Title number="05" category="Assembly">
+          Jigs & Fixtures
         </Title>
         <Header>
-          Ensuring the system remains dormant until deployment is a strict launch requirement.
+          Precision alignment is rarely achievable by hand.
         </Header>
       </div>
 
       <section className="space-y-4">
-        <Section>Inhibit Mechanisms</Section>
+        <Section>Custom Tooling</Section>
         <Text>
-          Separation switches (or kill switches) are electromechanical devices that physically interrupt the power circuit while the hardware is stowed, automatically closing the circuit to activate the bus only after ejection.
+          Jigs and fixtures are custom-manufactured tools designed to hold components in a fixed, accurate position during assembly, ensuring repeatability for tasks like solar cell bonding or structural integration.
         </Text>
       </section>
 
       <section className="space-y-4">
-        <Section>Integration & Safety</Section>
+        <Section>Validation</Section>
         <Text>
-          Learn how to integrate these inhibits for launch safety and reliable system startup.
+          These aids are designed and validated to support consistent manufacturing tolerances.
         </Text>
       </section>
 

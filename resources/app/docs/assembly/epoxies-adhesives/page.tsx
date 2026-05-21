@@ -8,29 +8,29 @@ import Header from "../../../../components/content/Header";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 
-export default function SeparationSwitchesPage() {
+export default function EpoxiesAdhesivesPage() {
   return (
     <Content>
       <div className="space-y-3">
-        <Title number="04" category="Electrical Power Systems (EPS)">
-          Separation Switches
+        <Title number="05" category="Assembly">
+          Epoxies / Adhesives
         </Title>
         <Header>
-          Ensuring the system remains dormant until deployment is a strict launch requirement.
+          Standard mechanical fasteners often need chemical reinforcement to withstand launch loads.
         </Header>
       </div>
 
       <section className="space-y-4">
-        <Section>Inhibit Mechanisms</Section>
+        <Section>Bonding Agents</Section>
         <Text>
-          Separation switches (or kill switches) are electromechanical devices that physically interrupt the power circuit while the hardware is stowed, automatically closing the circuit to activate the bus only after ejection.
+          Epoxies and adhesives are specialized bonding agents used to lock fasteners (staking), mount sensors, and secure cabling.
         </Text>
       </section>
 
       <section className="space-y-4">
-        <Section>Integration & Safety</Section>
+        <Section>Selection Criteria</Section>
         <Text>
-          Learn how to integrate these inhibits for launch safety and reliable system startup.
+          Crucially, these materials are selected for low-outgassing properties to prevent optics contamination in a vacuum. Proper selection, surface preparation, and cure cycles are critical for success.
         </Text>
       </section>
 

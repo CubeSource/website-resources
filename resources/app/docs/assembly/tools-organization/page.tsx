@@ -8,29 +8,29 @@ import Header from "../../../../components/content/Header";
 import Text from "../../../../components/content/Text";
 import Section from "../../../../components/content/Section";
 
-export default function SeparationSwitchesPage() {
+export default function ToolsOrganizationPage() {
   return (
     <Content>
       <div className="space-y-3">
-        <Title number="04" category="Electrical Power Systems (EPS)">
-          Separation Switches
+        <Title number="05" category="Assembly">
+          Tools & Organization
         </Title>
         <Header>
-          Ensuring the system remains dormant until deployment is a strict launch requirement.
+          A disorganized build environment introduces risk to flight hardware.
         </Header>
       </div>
 
       <section className="space-y-4">
-        <Section>Inhibit Mechanisms</Section>
+        <Section>Systematic Arrangement</Section>
         <Text>
-          Separation switches (or kill switches) are electromechanical devices that physically interrupt the power circuit while the hardware is stowed, automatically closing the circuit to activate the bus only after ejection.
+          Tools and organization refer to the systematic arrangement of cleanroom-compatible equipment, ESD-safe workstations, and strict inventory tracking (kitting) required to assemble systems without introducing debris or static damage.
         </Text>
       </section>
 
       <section className="space-y-4">
-        <Section>Integration & Safety</Section>
+        <Section>Professional Workflows</Section>
         <Text>
-          Learn how to integrate these inhibits for launch safety and reliable system startup.
+          Professional workflows are established for efficient, safe integration.
         </Text>
       </section>
 

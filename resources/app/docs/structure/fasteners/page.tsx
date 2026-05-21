@@ -19,11 +19,11 @@ export default function FastenersPage() {
           Select fastener materials, thread specs, and retention strategies for flight hardware.
         </Header>
       </div>
-      
+
       <section className="space-y-4">
         <Section>Fastener Materials</Section>
         <Text>
-          Aerospace fasteners are typically made from corrosion-resistant materials such as stainless steel (A286, 17-4PH) or titanium alloys. 
+          Aerospace fasteners are typically made from corrosion-resistant materials such as stainless steel (A286, 17-4PH) or titanium alloys.
           Material selection depends on strength requirements, thermal compatibility, and mission environment considerations.
         </Text>
       </section>
@@ -31,27 +31,21 @@ export default function FastenersPage() {
       <section className="space-y-4">
         <Section>Thread Specifications</Section>
         <Text>
-          Standard thread specifications for CubeSats include #4-40, #6-32, and M3 metric threads. Thread selection balances strength requirements, 
+          Standard thread specifications for CubeSats include #4-40, #6-32, and M3 metric threads. Thread selection balances strength requirements,
           available space, and compatibility with commercial off-the-shelf components. Proper thread engagement and torque specifications are critical for mission success.
+          Refer to a <a href="https://www.fastenal.com/content/merch_rules/images/fcom/content-library/Torque-Tension%20Reference%20Guide.pdf" target="_blank" className="text-blue-400 hover:underline">standard torque chart</a> for guidance or use our <Link href="/calculators/fastener-torque" className="text-blue-400 hover:underline">calculator</Link>.
         </Text>
       </section>
 
       <section className="space-y-4">
         <Section>Retention Strategies</Section>
         <Text>
-          Fastener retention is essential to prevent loosening during launch vibrations and thermal cycling. Common methods include thread-locking compounds, 
+          Fastener retention is essential to prevent loosening during launch vibrations and thermal cycling. Common methods include thread-locking compounds (like Vibra-Tite VC-3),
           lock washers, safety wire, and self-locking fasteners. The retention method must be compatible with the operating environment and mission requirements.
         </Text>
       </section>
 
-      <div className="pt-6">
-        <Link 
-          href="/" 
-          className={`${vt323.className} text-lg text-zinc-400 underline decoration-zinc-500 hover:text-zinc-200 hover:decoration-zinc-300 transition-colors`}
-        >
-          ← Back to home
-        </Link>
-      </div>
+
     </Content>
   );
 }

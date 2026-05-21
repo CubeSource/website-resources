@@ -7,11 +7,14 @@ export type CategoryItem = {
 export type Category = {
   name: string;
   items: CategoryItem[];
+  image?: string;
+  imageSize?: number;
 };
 
 export const categories: Category[] = [
   {
     name: "Getting Started",
+    image: "/images/graphic-1u.png",
     items: [
       {
         title: "What's a CubeSat?",
@@ -23,6 +26,7 @@ export const categories: Category[] = [
   },
   {
     name: "Structure",
+    image: "/images/graphic-structure1.png",
     items: [
       {
         title: "Frames",
@@ -46,6 +50,7 @@ export const categories: Category[] = [
   },
   {
     name: "Hold-Down Release Mechanisms",
+    image: "/images/graphic-burnwire.png",
     items: [
       {
         title: "Thermal Knives / Burnwires",
@@ -63,72 +68,70 @@ export const categories: Category[] = [
   },
   {
     name: "Electrical Power Systems (EPS)",
+    image: "/images/graphic-eps.png",
+    imageSize: 120,
     items: [
       {
         title: "Batteries",
         description:
-          "Compare cell chemistries, pack architectures, and battery management for space missions.",
+          "Reliable energy storage is critical for survival during eclipse phases. Learn about cell selection, safe pack architecture, and Battery Management Systems.",
         route: "/docs/eps/batteries",
       },
       {
         title: "Solar Panels",
         description:
-          "Model solar arrays, deployables, and power point tracking to feed spacecraft loads.",
+          "Solar panels are the primary power source for most missions. Explore array modeling, deployment mechanisms, and MPPT optimization.",
         route: "/docs/eps/solar-panels",
       },
       {
         title: "Separation Switches",
         description:
-          "Integrate separation switches for launch safety and automated system enabling.",
+          "Separation switches ensure the system remains dormant until deployment. Learn how to integrate these inhibits for safety and reliable startup.",
         route: "/docs/eps/separation-switches",
       },
     ],
   },
   {
     name: "Assembly",
+    image: "/images/graphic-assembly.png",
     items: [
-      {
-        title: "Fastener Torque Calculations",
-        description:
-          "Calculate torque specs and preload requirements to ensure structural integrity.",
-        route: "/docs/assembly/fastener-torque-calculations",
-      },
+
       {
         title: "Epoxies / Adhesives",
         description:
-          "Select and apply aerospace adhesives with appropriate surface prep and cure cycles.",
+          "Specialized bonding agents are needed to reinforce fasteners and mount sensors. This guide details selection and cure cycles for low-outgassing materials.",
         route: "/docs/assembly/epoxies-adhesives",
       },
       {
         title: "Tools & Organization",
         description:
-          "Set up cleanroom-friendly tools, kitting, and ESD-safe workflows for integration.",
+          "A disorganized build environment introduces risk. Learn about cleanroom-compatible equipment, ESD safety, and inventory tracking.",
         route: "/docs/assembly/tools-organization",
       },
       {
         title: "Jigs & Fixtures",
         description:
-          "Design and validate jigs and fixtures that support repeatable, precise assembly work.",
+          "Precision alignment requires custom tooling. Discover how to design and validate jigs for consistent manufacturing tolerances.",
         route: "/docs/assembly/jigs-fixtures",
       },
     ],
   },
   {
     name: "Environmental Testing",
+    image: "/images/graphic-enviroment.png",
     items: [
       {
         title: "Vibration Testing",
         description:
-          "Plan sine, random, and shock tests, including fixture design and acceptance criteria.",
+          "Hardware must survive the intense energy of launch. Plan sine, random, and shock tests to verify structural integrity.",
         route: "/docs/environmental-testing/vibration-testing",
       },
       {
         title: "Thermal Testing",
         description:
-          "Execute thermal balance and thermal vacuum campaigns to validate spacecraft performance.",
+          "Validate that your system can withstand extreme orbital temperatures. Learn how to execute thermal balance and TVAC campaigns.",
         route: "/docs/environmental-testing/thermal-testing",
       },
     ],
   },
 ];
-

@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
               </a>
               <a href="https://satsearch.co" target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity block">
                 <img
-                  src="https://static.wixstatic.com/media/b4da61_c663af42359b4aac9000e4096c6f12d3~mv2.png/v1/fill/w_264,h_61,al_c,q_85,usm_0.66_1.00_0.01/b4da61_c663af42359b4aac9000e4096c6f12d3~mv2.png"
+                  src="/images/satsearch.png"
                   alt="satsearch"
                   className="w-[190px] h-auto object-contain"
                 />

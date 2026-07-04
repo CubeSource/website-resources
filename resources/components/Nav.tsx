@@ -33,7 +33,7 @@ export default function NavBar() {
     {
       href: "/satcomm",
       label: "SatComm",
-      about: "Satellite comms visualiser and tools"
+      about: "Satellite communication constellation visualiser and tools."
     },
     {
       href: "/calculators",
@@ -44,6 +44,11 @@ export default function NavBar() {
       href: "/resources",
       label: "Documents",
       about: "Documents by organizations like SpaceX and NASA detailing standards."
+    },
+    {
+      href: "/tips",
+      label: "Tips & Tricks",
+      about: "Tips and tricks on satellite design from industry insiders."
     }
   ];
 
@@ -119,7 +124,7 @@ export default function NavBar() {
             <div className="flex flex-col items-center gap-4 p-[6px] pl-[4px] mt-[-1px]">
               <a href="https://cubesource.space/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center no-underline">
                 <Image src="/Logo.png" alt="UCDevs logo" width={20} height={30} className="!w-[20px] !h-[30px]" style={{ width: '20px', height: '28px' }} />
-                <span className={`${vt323.className} text-xs text-white/90 mt-2`}>Home</span>
+                {/*<span className={`${vt323.className} text-xs text-white/90 mt-2`}>Home</span>*/}
               </a>
             </div>
 

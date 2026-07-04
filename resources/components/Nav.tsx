@@ -31,17 +31,12 @@ export default function NavBar() {
       about: "Browse comprehensive guides and documentation."
     },
     {
-      href: "/satcomm",
-      label: "SatComm",
+      href: "/constellations",
+      label: "Constellations",
       about: "Satellite communication constellation visualiser and tools."
     },
     {
-      href: "/calculators",
-      label: "Calculators",
-      about: "Access useful calculation tools and utilities."
-    },
-    {
-      href: "/resources",
+      href: "/documents",
       label: "Documents",
       about: "Documents by organizations like SpaceX and NASA detailing standards."
     },

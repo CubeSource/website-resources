@@ -27,7 +27,7 @@ export default function NavBar() {
   const navLinks: NavLink[] = [
     {
       href: "/",
-      label: "Resource Center",
+      label: "Resources",
       about: "Browse comprehensive guides and documentation."
     },
     {

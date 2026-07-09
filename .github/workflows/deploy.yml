@@ -1,0 +1,16 @@
+name: Trigger Vercel Deploy
+
+# Fires a Vercel Deploy Hook on every push to main, regardless of commit
+# author. This lets any collaborator's push deploy the site on Vercel's free
+# Hobby plan, which otherwise only builds commits authored by a Vercel member.
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel Deploy Hook
+        run: |
+          curl -fsS -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"

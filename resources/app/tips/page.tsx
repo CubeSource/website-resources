@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import StarryBackground from "../../components/StarryBackground";
 import NavBar from "../../components/Nav";
 import { outfit, vt323 } from "../../lib/fonts";
@@ -11,6 +12,7 @@ type Tip = {
   id: string;
   text: string;
   source?: string; // attributed handle, if the tip name-checked one
+  image?: string; // filename in public/images/tips, e.g. "001.jpg"
 };
 
 const tips: Tip[] = [
@@ -18,11 +20,13 @@ const tips: Tip[] = [
     id: "001",
     text: "Containerized satellites require a minimum of two hardware interlocks to prevent power-up during launch — aka separation switches. The Omron D2F series is a popular choice, and one of the few COTS options available.",
     source: "@OmronComponents",
+    image: "",
   },
   {
     id: "002",
     text: 'Silicon solar cells are often written off as not "space grade." Somebody forgot to tell SpaceX, who uses them on Starlink — the biggest satellite constellation in history. Silicon cells are nearing 26–27% efficiency for under $1/W, and in LEO, radiation exposure is minimal.',
     source: "@SpaceX",
+    image: "silicon_cells.jpeg",
   },
   {
     id: "003",
@@ -36,6 +40,7 @@ const tips: Tip[] = [
   {
     id: "005",
     text: "Believe it or not, the sequence you torque your fasteners in makes a real difference — especially once you're working with 0.1 mm tolerances.",
+    image: "wrench_seq.jpeg",
   },
   {
     id: "006",
@@ -115,6 +120,16 @@ export default function TipsAndTricks() {
                 <p className={`${outfit.className} mt-1 text-sm leading-relaxed text-zinc-300 sm:text-base`}>
                   {tip.text}
                 </p>
+                {tip.image && (
+                  <div className="relative mt-3 aspect-video w-full max-w-md overflow-hidden border border-white/10">
+                    <Image
+                      src={`/images/tips/${tip.image}`}
+                      alt={`Illustration for tip ${tip.id}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
                 {tip.source && (
                   <a href={`https://x.com/${tip.source}`} target="_blank" className={`${outfit.className} mt-2 inline-block text-xs text-zinc-500 hover:underline`}>
                     {tip.source}

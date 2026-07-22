@@ -105,7 +105,7 @@ export default function NavBar() {
     menuOpen 
       ? 'bottom-0 px-0 py-0' 
       : 'px-4 sm:px-8 py-2 sm:py-3 md:px-16';
-  const navbarClasses = menuOpen ? 'w-full h-full rounded-none border-0 pb-16 py-4 px-4' : 'px-4 sm:px-6 py-3 rounded-xl w-full sm:w-auto';
+  const navbarClasses = menuOpen ? 'w-full h-full rounded-none border-0 pb-16 py-4 px-4' : 'px-4 sm:px-6 py-3 rounded-none w-full sm:w-auto';
   const menuContentClasses = menuOpen ? 'opacity-100 mt-4 px-4 sm:px-6' : 'max-h-0 opacity-0 mt-0';
 
   return (

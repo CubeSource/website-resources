@@ -20,7 +20,7 @@ const tips: Tip[] = [
     id: "001",
     text: "Containerized satellites require a minimum of two hardware interlocks to prevent power-up during launch — aka separation switches. The Omron D2F series is a popular choice, and one of the few COTS options available.",
     source: "@OmronComponents",
-    image: "",
+    image: "containerized.jpeg",
   },
   {
     id: "002",
@@ -36,6 +36,7 @@ const tips: Tip[] = [
   {
     id: "004",
     text: "A lesser-known benefit of running multiple GNSS antennas, beyond redundancy, is lower power draw: GPS can acquire the minimum number of satellites needed for a fix faster with more antennas feeding it.",
+    image: "gnss.jpeg",
   },
   {
     id: "005",
@@ -45,19 +46,64 @@ const tips: Tip[] = [
   {
     id: "006",
     text: '1U and 2U CubeSats need separation spring plungers, since several may be stacked in a single deployer. 3U and 6U buses skip this requirement and often pick up extra "tuna can" volume instead.',
+    image: "",
   },
   {
     id: "007",
     text: "If you're working on nanosatellites, chances are you've read Cal Poly's CubeSat Design Specification. It doesn't mention this, but chamfers are commonly used instead of fillets — they're far easier to CNC and serve the same function. Question your constraints.",
     source: "@CalPoly",
+    image: "calpolyspec.jpeg",
   },
   {
     id: "008",
     text: "For students: run collaborative systems-engineering meetings where mission options get discussed and constraints get defined out loud. The constraints will keep changing — but knowing what they were, and why, is what keeps a team engaged.",
+    image: "",
   },
   {
     id: "009",
     text: "On canceling magnetic moments: your shielding doesn't need to be pure, just a high percentage. Conformal coating mostly negates the issue on its own, and lead also happens to have good fatigue properties if you go that route.",
+    image: "",
+  },
+  {
+    id: "010",
+    text: 'Electrical components that aren\'t specifically made for space will have "Earth centric" datasheets. Make sure to check which assumptions are used. For example, power ratings assume convective heat transfer.',
+    image: "",
+  },
+  {
+    id: "011",
+    text: "Every engineer is a systems engineer. Being willing to communicate with and think critically about disciplines that are outside your area of expertise is essential for successful missions.",
+    image: "",
+  },
+  {
+    id: "012",
+    text: "Hate fumbling fasteners? Knurled socket head cap screws are the easiest to handle during assembly. The knurling helps with hand threading them in before switching to your favorite driver (Wera).",
+    image: "fasteners.jpeg",
+  },
+  {
+    id: "013",
+    text: "Avoid blind holes in your satellite frame. These can create little air pockets. If necessary, pair with vented fasteners.",
+    image: "blind_holes.jpeg",
+  },
+  {
+    id: "014",
+    text: "Roller-style switches have less chance of catching and breaking while being inserted or removed from a deployer.",
+    image: "rollers.jpeg",
+  },
+  {
+    id: "015",
+    text: "Getting to space is hard — and not just technically. Some of your biggest hurdles aren't engineering: keeping a team together, filling out paperwork, holding your ground in contract negotiations. That's what getting to space actually looks like.",
+    image: "",
+  },
+  {
+    id: "016",
+    text: "Great advice via SAWT: write a \"master sim\" — orbit, attitude, thermals, power, and RF all combined — from scratch, in a language you know. By the time you're done, you'll have a strong grasp of the common trade spaces in spacecraft design.",
+    source: "@AI_in_LEO",
+    image: "",
+  },
+  {
+    id: "017",
+    text: "Use a piece of kapton tape to hold tricky fasteners in place while installing.",
+    image: "kapton.jpeg",
   },
 ];
 
